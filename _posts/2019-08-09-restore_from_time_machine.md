@@ -1,10 +1,10 @@
 ---
 layout: post
-title: OS X Server configuration from Time Machine
+title: Use "tmutil" to Restore files from Time Machine
 ---
 
 Time Machine\'s GUI is great for your applications\' documents; but,
-when you want to restore files that require super user privileges, you
+when you want to restore files that require superuser privileges, you
 need the extra control you get from OS X\'s `tmutil` command.
 
 `sudo tmutil listbackups` shows you which snapshots are available to
