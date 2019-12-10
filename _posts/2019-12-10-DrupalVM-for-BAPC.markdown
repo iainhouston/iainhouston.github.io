@@ -172,23 +172,18 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
   Developer Edition of Mozilla Firefox 72.0b1
   ```
 
-    **Errors?** My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.
+
+  **Errors?** My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.
 
 2. **Key environment variable**
 
-    If you think you're provisioning a live server rather than a development one, or vice versa, ensure that the `DRUPALVM_ENV` environment variable is correctly set by issuing vagrant commands in the form: `DRUPALVM_ENV=vagrant vagrant up` and `DRUPALVM_ENV=vagrant vagrant provision`. Keep and eye on `echo $DRUPALVM_ENV`: that caught me out.
+  If you think you're provisioning a live server rather than a development one, or vice versa, ensure that the `DRUPALVM_ENV` environment variable is correctly set by issuing vagrant commands in the form: `DRUPALVM_ENV=vagrant vagrant up` and `DRUPALVM_ENV=vagrant vagrant provision`. Keep and eye on `echo $DRUPALVM_ENV`: that caught me out.
 
 3. **Drush:**
 
   Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `drush/sites` for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in host and guest machines i.e. in MacOS host and Linux guest.
 
-  ```
-  vagrant ssh
-  drush rsync  @balive:%files @self:%files --exclude-paths=sync:css:js:php
-  drush sql-sync  @balive @self
-  drush @self updb
-  ```
-
+  
 Provisioning
 ========
 
