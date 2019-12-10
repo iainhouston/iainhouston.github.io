@@ -69,7 +69,11 @@ Quick start
 
     This access is needed in the next step.  
 
-7.  Sync the Live Drupal to the Development Drupal  
+7.  Fire up the development VM  
+
+    `vagrant up` will also provision the VM if it does not previously exist, otherwise Vagrant will just boot it up and manage the IP Addresses in `/etc/hosts` and the NFS shared directories in `/etc/exports`
+
+8.  Sync the Live Drupal to the Development Drupal  
 
     `cloneLive2Dev` clones the live database and the static files (uploaded images, PDFs etc.) to the development Drupal in the VM.
 
@@ -77,13 +81,19 @@ Quick start
 
     For this reason, too, `cloneLive2Dev`  `rsync`s the static files from `wpbapc`'s access in the live server to the controlling host's `/web/sites/default/files/` rather than using `drush core:rsync`. NFS makes these files immediately available to the development server's VM.  
 
-8.  Make changes to the site's Theme
+9.  Make changes to the site's Theme
 
-    Verify you have `NodeJS` installed per [Required Software](#required_soft)above
+    *  Verify you have `NodeJS` installed per [Required Software](#required_soft)above
 
-    `cdt` will change directories to `web/themes/contrib/pellucid_monoset`
+    *  `cdt` will change directories to `web/themes/contrib/pellucid_monoset`
 
-    From `web/themes/contrib/pellucid_monoset` do `npm install` to install a local `gulp` (a `NodeJS` based toolchain.
+    *  From `web/themes/contrib/pellucid_monoset` do `npm install` to install a local `gulp` (a `NodeJS` based toolchain)
+
+    *  `npx gulp` will use the locally-installed `gulp` to fire up Firefox and  `BrowserSync` and inject CSS into Firefox-rendered pages as gulp watches for changes to various source files and automatically triggers Sass compiles and `drush` cache clears as appropriate.  
+
+    Our Druopal Theme module - `iainhouston/pellucid_monoset` - in `web/themes/contrib/pellucid_monoset` is under version control separately from `iainhouston/bradford-abbas.uk`. A git tag must be pushed to GitHub when a new version is developed to ensure that this latest version is picked up when `composer update iainhouston/pellucid_monoset` is run next in the project folder `~/bradford-abbas.uk`
+
+
 
 [//]: # (' Markdown workaround)
 
@@ -149,7 +159,7 @@ These are in the following directories:
 
   * `vm/templates`  
 
-      `jinja2` templates for files to be customised by Ansible before boing copied into a server during provisioning.
+    `jinja2` templates for files to be customised by Ansible before boing copied into a server during provisioning.
 
 *  The `web` directory
 
@@ -173,13 +183,13 @@ These are in the following directories:
 
 *  `tmp` and `private_files`  
 
-    These directories are created by Ansible tasks  
+    These directories are created by Ansible in the project folder - i.e. a level above the Drupal docroot (where the `index.php` sits). Ansible does this in two circumstances.
 
-    1. As a side-effect of provisioning the devlopment server with `vagrant up` or `vagrant provision`.
+    1. On the devlopment server as a side-effect of provisioning with `vagrant up` or `vagrant provision`.
 
-    2. As a side-effect of provisioning the live production server with `ansible-playbook` (See [Run the provisioning playbook](#prodn_provision))
+    2. On the live production server as a side-effect of provisioning  with `ansible-playbook` (See [Run the provisioning playbook](#prodn_provision))
 
-    They are purely for use by a running Drupal system
+    These two directories are purely for use by a running Drupal system
 
 
 Development:
@@ -231,7 +241,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
 3. **Drush:**
 
-    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `<project root>/drush/sites` locally for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in both host and guest machines - i.e. in MacOS host and Linux guest -  we know we're at exactly the same relesase: host (a.k.a.controller); dev server; and live server.
+    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally installed `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `<project root>/drush/sites` locally for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in both host and guest machines - i.e. in MacOS host and Linux guest VM -  we know we're at exactly the same `drush` relesase: host (a.k.a.controller); dev server; and live server.
 
 
 Provisioning
