@@ -170,7 +170,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
     vagrant-vbguest (0.21.0, global)
       - Version Constraint: 0.21
     Developer Edition of Mozilla Firefox 72.0b1
-    ```
+    ```    
 
     **Errors?** My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.    
 
