@@ -14,19 +14,11 @@ We use our fork of [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep
 
 -  The configuration of both operating system and software components are the same.
 
-You can see how I've used Drupal-VM [here at bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk).
-
-Three convenience shell commands do much of the day-to-day heavy lifting for us:
+You can see how I've used Drupal-VM to build and maintain [our website here at bradford-abbas.uk](https://bradford-abbas.uk).
 
 
-```sh
-√ bradford-abbas.uk % cdbadev
-updateLiveCode - Code and Config to Live site
-cloneLive2Dev  - Clone Live Database and Files to Dev site
-safecex        - Safe export of Dev site's configuration
-endev          - Enable development modules in Dev site
-```
-
+The following describes our use of Drupal-VM using the `refactorvm`
+ branch of our GitHub repo  [iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk)
 
 Quick start
 ========
@@ -39,16 +31,54 @@ Quick start
   alias cdbadev="cd ~/bradford-abbas.uk && source ./scripts/badev/dev_aliases.sh"
   ```
 
-3. `$ source ~/.bashrc` (or `~/.zshrc` as appropriate)
+3. `$ source ~/.zshrc` (or `~/.bashrc` as appropriate)
 
 4. `$ cdbadev` =>
 
-  ```sh
-updateLiveCode - Code and Config to Live site
-cloneLive2Dev  - Clone Live Database and Files to Dev site
-safecex        - Safe export of Dev site's configuration
-endev          - Enable development modules in Dev site
-  ```
+    ```sh
+    updateLiveCode - Code and Config to Live site
+    cloneLive2Dev  - Clone Live Database and Files to Dev site
+    safecex        - Safe export of Dev site's configuration
+    endev          - Enable development modules in Dev site
+    ```    
+
+    We have written several convenience shell commands to do much of the day-to-day heavy lifting for us. As above, we are reminded of four of them when we switch to our `~/bradford-abbas.uk` directory. `cdbadev` also assigns several key exports and aliases.
+
+5.  Install the libraries and a working Drupal
+
+    `composer install` will download all the libraries. These include the Symfony PHP libraries, upon which Drupal is built; Drupal's core and contributed modules; other non-PHP libraries like our own Ansible rôles and tasks in `iainhouston/drupal-vm`, and our own Drupal theme `iainhouston/pellucid_monoset`
+
+    `composer install` also places the appropriate modules in the appropriate directories in the `web` directory which it creates for us (please ensure you don't start out with `~/bradford-abbas/web` or `composer install` will not create the Druap site.)
+
+    You can check that the installation has been successful and will access `http` requests by the presence of `~/bradford-abbas/web/autoload.php` because, mportantly, `composer install` creates `~/bradford-abbas/web/autoload.php` so that running Drupal modules have access to the libraries in `~/bradford-abbas/web/../vendor/` via `~/bradford-abbas/web/../vendor/autoload.php`
+
+6.  Verify `webmaster`'s access to the Live Server  
+
+    Satisfy yourself that the `Host` settings in your `~/.ssh/config` settings match the host names in `scripts/badev/dev_aliases.sh` and that you have the correct key pair `IdentityFile` provided when [the AWS EC2 Server was set up](#live_init).  Do this by `ssh wpbapc` success.  
+
+    ```
+    Host wpbapc
+         ForwardX11 no
+         User webmaster
+         Hostname bradford-abbas.uk
+         PreferredAuthentications publickey
+         IdentityFile  ~/.ssh/BAPC-2.pem
+    ```
+
+    For example,  `cdbadev` does `export LIVE_SSH_ALIAS="wpbapc"` and several scripts in `scripts/badev` refer to `$LIVE_SSH_ALIAS`
+
+    This access is needed in the next step.  
+
+7.  Sync the Live Drupal to the Development Drupal  
+
+    `cloneLive2Dev` clones the live database and the static files (uploaded images, PDFs etc.) to the development Drupal in the VM.
+
+    Drush will not copy/clone between to remote servers. We (the host controller Mac) are dumping the live SQL into a newly-named file in `vm/saved_sql/live` for later use if required, and importing it into `@badev`, the development Drupal.  
+
+    For this reason, too, `cloneLive2Dev`  `rsync`s the static files from `wpbapc`'s access in the live server to the controlling host's `/web/sites/default/files/` rather than using `drush core:rsync`. NFS makes these files immediately available to the development server's VM.
+
+[//]: # (' Markdown workaround)
+
 
 Regular maintenance
 ===============
@@ -72,10 +102,9 @@ This doesn't re-provision the live server, it does just those playbook tasks - t
 
 *  Drupal core and contributed modules (via `composer.json`)
 *  Our SSL key and certificate
-*  Drupal configuration YAML from most recent  `drush @badev cex`   
-   *but note that it doesn't run a*  `drush @balive cim`
+*  Drupal configuration YAML from most recent local  `drush @badev cex` (and thus `safecex`). But note that it doesn\'t run a  `drush @balive cim`
 
-So you run `updateLiveCode` when any of these have been updated and tested on the local development site.
+So you run `updateLiveCode` to deploy to the live server after any of these have been updated and tested on the local development site.
 
 Important configuration files
 ======================
@@ -192,7 +221,7 @@ ansible-vault view  vm/secrets.yml
 ansible-vault edit  vm/secrets.yml
 ```
 
-Encrypting SSL key and certificate.</a>
+Encrypting SSL key and certificate.
 -----------
 
 <a name="enc_ssl">Like this:</a>
@@ -201,6 +230,11 @@ Encrypting SSL key and certificate.</a>
 ansible-vault encrypt  vm/certs/SSL.crt
 ```
 
+
+The Live Production Server
+==========================
+
+<a name="live_init"></a>
 
 Initialising the AWS EC2 live server
 -------------------------------
