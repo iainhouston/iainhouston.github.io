@@ -215,34 +215,34 @@ This step is required before we can provision the live server with all the softw
 
 1. Enable `root` login on EC2 server. This assumes that we have the AWS EC2 server account's private key in `~/.ssh/BAPC-2.pem` on the Mac
 
-  ```
-  ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem # from local
-  sudo emacs /root/.ssh/authorized_keys # on remote
-  ```  
+    ```
+    ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem # from local
+    sudo emacs /root/.ssh/authorized_keys # on remote
+    ```  
 
 2. On EC2 server: Install Python (and editor).
 
-  Ansible needs this to work its provisioning magic. `sudo apt install python` installs Python 2.7 (and `emacs` if you're not comfortable with `vi`).
+    Ansible needs this to work its provisioning magic. `sudo apt install python` installs Python 2.7 (and `emacs` if you're not comfortable with `vi`).
 
 3. On EC2 server: remove the preamble  
 
-  remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
+      remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
 
 4. On local control machine: Create `vars.yml`
 
-  Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
+      Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
 
 5. On local control machine: run the 'init' playbook.  
 
-  ```
-  ansible-playbook -i vm/inventory vendor/iainhouston/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
-  ```
+    ```
+    ansible-playbook -i vm/inventory vendor/iainhouston/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
+    ```
 
-  We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.  
+    We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.  
 
 6. On EC2 server:  revert the preamble
 
-  revert the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys` to prevent anyone logging into `root` directly.
+    revert the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys` to prevent anyone logging into `root` directly.
 
 
 Provisioning the Production server
