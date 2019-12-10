@@ -75,7 +75,15 @@ Quick start
 
     Drush will not copy/clone between to remote servers. We (the host controller Mac) are dumping the live SQL into a newly-named file in `vm/saved_sql/live` for later use if required, and importing it into `@badev`, the development Drupal.  
 
-    For this reason, too, `cloneLive2Dev`  `rsync`s the static files from `wpbapc`'s access in the live server to the controlling host's `/web/sites/default/files/` rather than using `drush core:rsync`. NFS makes these files immediately available to the development server's VM.
+    For this reason, too, `cloneLive2Dev`  `rsync`s the static files from `wpbapc`'s access in the live server to the controlling host's `/web/sites/default/files/` rather than using `drush core:rsync`. NFS makes these files immediately available to the development server's VM.  
+
+8.  Make changes to the site's Theme
+
+    Verify you have `NodeJS` installed per [Required Software](#required_soft)above
+
+    `cdt` will change directories to `web/themes/contrib/pellucid_monoset`
+
+    From `web/themes/contrib/pellucid_monoset` do `npm install` to install a local `gulp` (a `NodeJS` based toolchain.
 
 [//]: # (' Markdown workaround)
 
@@ -111,14 +119,17 @@ Important configuration files
 
 These are in the following directories:
 
-* The `config` directory
+* The `config` directory  
 
-    This is where the Drupal configuration `.yml` are kept under `git` version control. After you have run `updateLiveCode` you then run `drush @balive cim` to import the new configuration into the live site.
+    `config/sync` is where the Drupal configuration `.yml` files are kept under `git` version control. After you have run `updateLiveCode` you then run `drush @balive cim` to import the new configuration into the live site.  
 
-* The `drush` directory
+    New configuration settings can occur both as a result of changes you make to Drupal Content Types etc., and changes to updated / newly installed Drupal Corre and Contributed modules.
 
-    *  `drush/sites` contains the drush alias definitions for `@balive` and `@badev`  
+    When you run `safecex` then `config/sync` is replaced by configuration `.yml` files exported from the development Drupal's current database into the `git` change managemnt.
 
+* The `drush` directory  
+
+    `drush/sites` contains the drush alias definitions for `@balive` and `@badev`  
 
 * The `scripts` directory
 
@@ -144,17 +155,32 @@ These are in the following directories:
 
     This is Drupal's *docroot*. Make sure it **doesn't** exist before you run `composer install` as will be the case first thing after having cloned this repo.
 
-*  Note that the *Project root* is `.../bradford-abbas.uk` where you cloined this repo.  
+    Note that the *Project root* is `.../bradford-abbas.uk` where you cloied this repo.  
 
-  *  `composer.json`
+*  `composer.json`  
 
-  *  `Vagrantfile`
+    Updated by all the `composer require ...` and `composer update ...` we've done over the lifetime of the project. It is used both to establish our development and live production Drupal systems and to deploy updates through `git`.   
 
-  Note that this loads the `Vagrantfile` in `vendor/iainhouston/drupal-vm` but also sets some important local `ENV`ironmen=t variables including some Ansible argumments that you might have overlooked
+    In the `require-dev` section we have packages that are not required on the live production server (e.g. `drupal/devl` and `iainhouston/drupal-vm`)
+
+*  `Vagrantfile`
+
+    Note that this loads the `Vagrantfile` in `vendor/iainhouston/drupal-vm` but also sets some important local `ENV`ironmen=t variables including some Ansible argumments that you might have overlooked
 
 * `vendor`
 
-  This is where `composer` installs all the required libraries including the Symfony PHP modules etc. for Drupal, and other non-PHP libraries - including `iainhouston/drupal-vm`
+    This is where `composer` installs all the required libraries including the Symfony PHP modules etc. for Drupal, and other non-PHP libraries - including `iainhouston/drupal-vm`  
+
+*  `tmp` and `private_files`  
+
+    These directories are created by Ansible tasks  
+
+    1. As a side-effect of provisioning the devlopment server with `vagrant up` or `vagrant provision`.
+
+    2. As a side-effect of provisioning the live production server with `ansible-playbook` (See [Run the provisioning playbook](#prodn_provision))
+
+    They are purely for use by a running Drupal system
+
 
 Development:
 ===============
@@ -169,6 +195,7 @@ Provisioning the development site
 
 I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/en/latest/getting-started/installation-windows/) how its done on a Windows 10 machine.
 
+<a name="required_soft"></a>
 
 1. **Required software**
 
@@ -289,6 +316,8 @@ In `prod.config.yml` we added ...
 pre_provision_tasks_dir: "{{ config_dir }}/pre_provision_tasks/*"
 post_provision_tasks_dir: "{{ config_dir }}/post_provision_tasks/*"
 ```
+
+<a name="prodn_provision"></a>
 
 Run the provisioning playbook
 -----------
