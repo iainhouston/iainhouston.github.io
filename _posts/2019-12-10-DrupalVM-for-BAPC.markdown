@@ -183,7 +183,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
   Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `drush/sites` for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in host and guest machines i.e. in MacOS host and Linux guest.
 
-  
+
 Provisioning
 ========
 
@@ -218,24 +218,32 @@ This step is required before we can provision the live server with all the softw
   ```
   ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem # from local
   sudo emacs /root/.ssh/authorized_keys # on remote
-  ```
+  ```  
 
-2. On EC2 server: Install Python (and editor). Ansible needs this to work its provisioning magic. `sudo apt install python` installs Python 2.7 (and `emacs` if you're not comfortable with `vi`).
+2. On EC2 server: Install Python (and editor).
 
-3. On EC2 server: remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
+  Ansible needs this to work its provisioning magic. `sudo apt install python` installs Python 2.7 (and `emacs` if you're not comfortable with `vi`).
 
-4. On local control machine: Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new
-admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
+3. On EC2 server: remove the preamble  
 
-5. On local control machine: run the 'init' playbook.
+  remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
+
+4. On local control machine: Create `vars.yml`
+
+  Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
+
+5. On local control machine: run the 'init' playbook.  
 
   ```
   ansible-playbook -i vm/inventory vendor/iainhouston/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
   ```
 
-  We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.
+  We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.  
 
-6. On EC2 server: revert the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys` to prevent anyone logging into `root` directly.
+6. On EC2 server:  revert the preamble
+
+  revert the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys` to prevent anyone logging into `root` directly.
+
 
 Provisioning the Production server
 ==================================
