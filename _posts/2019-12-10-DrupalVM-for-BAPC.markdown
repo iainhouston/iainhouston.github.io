@@ -6,7 +6,7 @@ categories: devops Drupal
 permalink: /drupalbapc/
 ---
 
-We use [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep our *development* and *live* sites' environments exactly in sync.
+We use our fork of [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep our *development* and *live* sites' environments exactly in sync.
 
 -  The operating system is at exactly the same level
 
@@ -14,37 +14,40 @@ We use [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep our *develo
 
 -  The configuration of both operating system and software components are the same.
 
-You can see how I've used Drupal-VM [here at bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk). (What follows is the GitHub repo's README file.)
+You can see how I've used Drupal-VM [here at bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk).
 
-Three convenience shell commands do much of the heavy lifting for us:
+Three convenience shell commands do much of the day-to-day heavy lifting for us:
 
 
 ```sh
+√ bradford-abbas.uk % cdbadev
 updateLiveCode - Code and Config to Live site
-rsyncp2dfiles  - Get latest files from live site
-sqldumpDev     - Get latest SQL from live site
+cloneLive2Dev  - Clone Live Database and Files to Dev site
+safecex        - Safe export of Dev site's configuration
+endev          - Enable development modules in Dev site
 ```
 
 
 Quick start
 ========
 
-1. Clone the [GitHub repo](https://github.com/iainhouston/drupal-vm) to `~/bradford-abbas.uk`
+1. Clone this [GitHub repo](https://github.com/iainhouston/drupal-vm) to `~/bradford-abbas.uk`
 
 2. Add the following alias to your `~/.bashrc` (or `~/.zshrc` as appropriate):
 
   ```sh
-  alias cdbadev="cd ~/bradford-abbas.uk && source ./scripts/badev/.dev_aliases"
+  alias cdbadev="cd ~/bradford-abbas.uk && source ./scripts/badev/dev_aliases.sh"
   ```
 
-3. `$ source ~/.bashrc`
+3. `$ source ~/.bashrc` (or `~/.zshrc` as appropriate)
 
 4. `$ cdbadev` =>
 
   ```sh
-  updateLiveCode - Code and Config to Live site
-  rsyncp2dfiles  - Get latest files from live site
-  sqldumpDev     - Get latest SQL from live site
+updateLiveCode - Code and Config to Live site
+cloneLive2Dev  - Clone Live Database and Files to Dev site
+safecex        - Safe export of Dev site's configuration
+endev          - Enable development modules in Dev site
   ```
 
 Regular maintenance
@@ -85,13 +88,14 @@ These are in the following directories:
 
 * The `drush` directory
 
-    *  `drush/sites` contains the drush alias definitions for `@balive` and `@badev`
+    *  `drush/sites` contains the drush alias definitions for `@balive` and `@badev`  
 
 
 * The `scripts` directory
 
-  Where the shortcut / convenience commands (see above) are defined.
+  * `badev` Where the shortcut / convenience commands (see above) are defined.
 
+  * `composer` contains a `composer` initialisation script that will install a basic Drupal site. Very useful. Make sure your `web` directory doesn't exists, though, before you run `composer install`
 
 * The `vm` directory
 
@@ -99,28 +103,34 @@ These are in the following directories:
 
     When a new SSL key / certificate pair are downloaded (via LCN, our registrar) they are encrypted here with `ansible-vault` ([see below](#enc_ssl)).
 
-  * `vm/post_provision_tasks`
+  * `vm/post_provision_tasks` and `vm/pre_provision_tasks`
 
-  * `vm/pre_provision_tasks`
+    As expected, Ansible tasks that extend the functionality of `drupal-vm` for our needs. For example: installing and configuring DKIM's digital 'signing' of emails
 
   * `vm/templates`  
 
-      Nginx web server settings for `bradford-abbas.uk` are declared in `vm/templates/nginx-ssl-vhost.j2`
+      `jinja2` templates for files to be customised by Ansible before boing copied into a server during provisioning.
 
 *  The `web` directory
 
-    This is Drupal's *docroot*
+    This is Drupal's *docroot*. Make sure it **doesn't** exist before you run `composer install` as will be the case first thing after having cloned this repo.
 
-*  Project root: `~/bradford-abbas.uk`  
+*  Note that the *Project root* is `.../bradford-abbas.uk` where you cloined this repo.  
 
   *  `composer.json`
 
   *  `Vagrantfile`
 
+  Note that this loads the `Vagrantfile` in `vendor/iainhouston/drupal-vm` but also sets some important local `ENV`ironmen=t variables including some Ansible argumments that you might have overlooked
+
+* `vendor`
+
+  This is where `composer` installs all the required libraries including the Symfony PHP modules etc. for Drupal, and other non-PHP libraries - including `iainhouston/drupal-vm`
+
 Development:
 ===============
 
-I used Jeff Geerling's Drupal-VM to create a local Drupal server per his [tutorial](https://www.jeffgeerling.com/blog/2017/soup-nuts-using-drupal-vm-build-local-and-prod).
+I used our fork of Jeff Geerling's Drupal-VM to create a local Drupal server per his [tutorial](https://www.jeffgeerling.com/blog/2017/soup-nuts-using-drupal-vm-build-local-and-prod).
 
 Just a few notes to expand on Jeff's excellent directions:
 
@@ -131,7 +141,9 @@ Provisioning the development site
 I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/en/latest/getting-started/installation-windows/) how its done on a Windows 10 machine.
 
 
-1. **Required software** Local environment at this time:
+1. **Required software**
+
+  Our local environment (at the time of writing is shown by  using our helper alias `checkVersions`:
 
     ```sh
     √ bradford-abbas.uk % checkVersions
@@ -162,64 +174,23 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
     **Errors?** My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.
 
-2. **Key environment variable** Ensure that the `DRUPALVM_ENV` environment variable is correctly set by issuing vagrant commands in the form: `DRUPALVM_ENV=vagrant vagrant up` and `DRUPALVM_ENV=vagrant vagrant provision`. Keep and eye on `echo $DRUPALVM_ENV`: that caught me out.
+2. **Key environment variable**
+
+    If you think you're provisioning a live server rather than a development one, or vice versa, ensure that the `DRUPALVM_ENV` environment variable is correctly set by issuing vagrant commands in the form: `DRUPALVM_ENV=vagrant vagrant up` and `DRUPALVM_ENV=vagrant vagrant provision`. Keep and eye on `echo $DRUPALVM_ENV`: that caught me out.
 
 3. **Drush:**
-  Getting `drush` right took a lot of my bandwidth as older versions  and the latest Drupal 8.4 have different dependencies on Symfony packages. So I really had to persist with `composer` etc. to get a working vagrant-based development setup.   
 
-  I am using drush 9.0.0-rc2. I encountered problems with both 8.1.15 and 9.0.0-rc2, but suppose Moshe Weitzman will be fixing 9.0.0-rc2 (I raised issues for some of the following)  
+  Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `drush/sites` for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in host and guest machines i.e. in MacOS host and Linux guest.
 
-  1. Run these commands *inside* the vagrant VM (or prod server) - regardless of whether you're using `drush` 8.1.15 or ~9.0  - only one of the aliases can be remote when running the `(sql-|r)sync` command. e.g.:  
-
-    ```
-    vagrant ssh
-    drush rsync  @balive:%files @self:%files --exclude-paths=sync:css:js:php
-    drush sql-sync  @balive @self
-    drush @self updb
-    ```
-
-    Note that - at this time - neither of the above commands work properly.
-
-    But ...  
-
-  2. **Workarounds:** Right now drush 9 (9.0.0-rc2) doesn't properly rsync to the correct destination (`drush rsync  @balive:%files @self:%files`) and `drush sql-dump  @balive` produces extraneous text in the SQL dump.  
-
-    *  Since `drush rsync` is not working as it used to, I am doing  
-
-       ```
-       rsync -avz wpbapc:/var/www/drupal/web/sites/default/files/ \
-       ./web/sites/default/files/ \
-       --exclude=js --exclude=php --exclude=css
-       ```  
-
-    *  Edit the output of `drush sql-dump  @balive > tmp.sql` to remove extraneous text string.   
-
-    * Issues raised on Github [`rsync`](https://github.com/drush-ops/drush/issues/3306) and [`sql-sync`](https://github.com/drush-ops/drush/issues/3305)
-
-It's pretty much as simple as that. OK, well, we also needed to convert
-our alias files into `.yml`. The conversion command didn't work
-properly. For example, the ssh options were  not as described
-[on the drush github repo](https://github.com/drush-ops/drush/blob/master/examples/example.site.yml).
-
-**Rationale:** I had unexplained errors with `drush/drush:8.1.15`
-so switched to `drush/drush:~9.0`.
-This means that I also required `ansible` to install  the
-[Drush Launcher](https://github.com/drush-ops/drush-launcher).  
+  ```
+  vagrant ssh
+  drush rsync  @balive:%files @self:%files --exclude-paths=sync:css:js:php
+  drush sql-sync  @balive @self
+  drush @self updb
+  ```
 
 Provisioning
 ========
-
-From Development to Production
---------------
-
-Again; I followed Jeff's blog. However, if you want to go back to provisioning a local server after you've provisioned your remote prod server, you'll have to account for the presence of any files you encrypted with `ansible-vault`.
-
-Once we have created and encrypted a `secrets.yml` file for production; should we wish to reprovision our vagrant development server, we will need to supply our vault password to Ansible which vagrant will only do after we have added this to our delegate `Vagrantfile` located in the project root.
-
-```
-ENV['DRUPALVM_ANSIBLE_ARGS'] = '--ask-vault-pass'
-```
-
 
 Managing the secrets file
 ---------------------------
@@ -287,8 +258,6 @@ In `prod.config.yml` we added ...
 pre_provision_tasks_dir: "{{ config_dir }}/pre_provision_tasks/*"
 post_provision_tasks_dir: "{{ config_dir }}/post_provision_tasks/*"
 ```
-
-To use an extra ansible task file, configure the path to the file (relative to `provisioning/playbook.yml`).
 
 Run the provisioning playbook
 -----------
