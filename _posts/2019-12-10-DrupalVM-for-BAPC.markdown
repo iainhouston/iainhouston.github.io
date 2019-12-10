@@ -25,7 +25,7 @@ Quick start
 
 1. Clone this [GitHub repo](https://github.com/iainhouston/drupal-vm) to `~/bradford-abbas.uk`
 
-2. Add the following alias to your `~/.bashrc` (or `~/.zshrc` as appropriate):
+2. Add the following alias to your `~/.zshrc` (or `~/.bashrc` as appropriate):
 
   ```sh
   alias cdbadev="cd ~/bradford-abbas.uk && source ./scripts/badev/dev_aliases.sh"
@@ -48,9 +48,11 @@ Quick start
 
     `composer install` will download all the libraries. These include the Symfony PHP libraries, upon which Drupal is built; Drupal's core and contributed modules; other non-PHP libraries like our own Ansible rôles and tasks in `iainhouston/drupal-vm`, and our own Drupal theme `iainhouston/pellucid_monoset`
 
-    `composer install` also places the appropriate modules in the appropriate directories in the `web` directory which it creates for us (please ensure you don't start out with `~/bradford-abbas/web` or `composer install` will not create the Druap site.)
+    `composer install` also places the appropriate Drupal contributed and core modules in the appropriate directories in the `web` directory which it creates for us (please ensure you don't start out with `~/bradford-abbas/web` or `composer install` will not create the Drupal site.)
 
-    You can check that the installation has been successful and will access `http` requests by the presence of `~/bradford-abbas/web/autoload.php` because, mportantly, `composer install` creates `~/bradford-abbas/web/autoload.php` so that running Drupal modules have access to the libraries in `~/bradford-abbas/web/../vendor/` via `~/bradford-abbas/web/../vendor/autoload.php`
+    You can reassure yourself that the installation has been successful and will shortly, after we have [fired up the development VM](#fire_up), respond to `http` requests by the presence of `~/bradford-abbas/web/autoload.php` and of the presence of `~/bradford-abbas/web/index.php`.
+
+    `composer install` creates `web/autoload.php` so that running Drupal modules have access to the libraries in `web/../vendor/` via `web/../vendor/autoload.php` and `vendor/composer/autoload_real.php` which will load any of the PHP classes etc. it discovers in the `vendor` packages.
 
 6.  Verify `webmaster`'s access to the Live Server  
 
@@ -68,6 +70,8 @@ Quick start
     For example,  `cdbadev` does `export LIVE_SSH_ALIAS="wpbapc"` and several scripts in `scripts/badev` refer to `$LIVE_SSH_ALIAS`
 
     This access is needed in the next step.  
+
+    <a name="fire_up"></a>
 
 7.  Fire up the development VM  
 
