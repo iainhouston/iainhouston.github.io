@@ -146,7 +146,6 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
   Our local environment (at the time of writing is shown by  using our helper alias `checkVersions`:    
 
     ```sh
-    √ bradford-abbas.uk % checkVersions
     PHP 7.4.0 (cli) (built: Nov 29 2019 16:18:44) ( NTS )
     Copyright (c) The PHP Group
     Zend Engine v3.4.0, Copyright (c) Zend Technologies
@@ -156,11 +155,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
     VirtualBox 6.0.14r133895
     ruby 2.6.3p62 (2019-04-16 revision 67580) [universal.x86_64-darwin19]
     ansible 2.9.1
-      config file = None
-      configured module search path = ['/Users/iainhouston/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-      ansible python module location = /usr/local/Cellar/ansible/2.9.1/libexec/lib/python3.7/site-packages/ansible
-      executable location = /usr/local/bin/ansible
-      python version = 3.7.5 (default, Nov 30 2019, 08:22:32) [Clang 11.0.0 (clang-1100.0.33.12)]
+    ...
     NodeJS Version v13.2.0
     npm Version 6.13.1
     vagrant-auto_network (1.0.3, global)
@@ -171,7 +166,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
       - Version Constraint: 0.21
     Developer Edition of Mozilla Firefox 72.0b
     ```    
-
+    
     Errors: My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.    
 
 2. **Key environment variable**
@@ -180,7 +175,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
 3. **Drush:**
 
-    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `drush/sites` for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in host and guest machines i.e. in MacOS host and Linux guest.
+    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally intalled `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `<project root>/drush/sites` locally for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in both host and guest machines - i.e. in MacOS host and Linux guest -  we know we're at exactly the same relesase: host (a.k.a.controller); dev server; and live server.
 
 
 Provisioning
