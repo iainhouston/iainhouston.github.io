@@ -1,14 +1,10 @@
 ---
 layout: post
 title:  "Developing and maintaining a Drupal site with Drupal-VM"
-date:   2019-08-17 20:10:41 +0100
-categories: devops Drupal 
+date:   2019-12-10
+categories: devops Drupal
 permalink: /drupalbapc/
 ---
-
-**Undergoing revision**
-
-**Summary**: In  praise of [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) with which we keep our *development* and *live* sites' environments exactly in sync.
 
 We use [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep our *development* and *live* sites' environments exactly in sync.
 
@@ -18,12 +14,12 @@ We use [Jeff Geerling's Drupal-VM](https://www.drupalvm.com) to keep our *develo
 
 -  The configuration of both operating system and software components are the same.
 
-You can see how I've used Drupal-VM [here at bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk). (What follows is the GitHub repo's REAME file.)
+You can see how I've used Drupal-VM [here at bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk). (What follows is the GitHub repo's README file.)
 
 Three convenience shell commands do much of the heavy lifting for us:
 
 
-```
+```sh
 updateLiveCode - Code and Config to Live site
 rsyncp2dfiles  - Get latest files from live site
 sqldumpDev     - Get latest SQL from live site
@@ -33,11 +29,11 @@ sqldumpDev     - Get latest SQL from live site
 Quick start
 ========
 
-1. Clone the GitHub repo to `~/bradford-abbas.uk`
+1. Clone the [GitHub repo](https://github.com/iainhouston/drupal-vm) to `~/bradford-abbas.uk`
 
-2. Add the following alias to your `~/.bashrc` (or `~/.bash_aliases` as appropriate):
+2. Add the following alias to your `~/.bashrc` (or `~/.zshrc` as appropriate):
 
-  ```
+  ```sh
   alias cdbadev="cd ~/bradford-abbas.uk && source ./scripts/badev/.dev_aliases"
   ```
 
@@ -45,7 +41,7 @@ Quick start
 
 4. `$ cdbadev` =>
 
-  ```
+  ```sh
   updateLiveCode - Code and Config to Live site
   rsyncp2dfiles  - Get latest files from live site
   sqldumpDev     - Get latest SQL from live site
@@ -59,12 +55,13 @@ Pushing updated stuff to the live site
 
 `updateLiveCode` is shorthand for:
 
-```
+```sh
 DRUPALVM_ENV=prod \
-ansible-playbook vendor/geerlingguy/drupal-vm/provisioning/playbook.yml \
+ansible-playbook vendor/iainhouston/drupal-vm/provisioning/playbook.yml \
 --inventory-file=vm/inventory \
 --tags=drupal   \
 --extra-vars="config_dir=$(pwd)/vm" \
+--skip-tags=test_only \
 --become --ask-become-pass --ask-vault-pass
 ```
 
@@ -136,12 +133,31 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
 1. **Required software** Local environment at this time:
 
-    ```
-    python --version #==> Python 2.7.14
-    ansible --version #==> ansible 2.4.2.0
-    vagrant --version #==> Vagrant 2.0.1
-    VBoxManage --version #==> Virtual Box 5.2.4r119785
-    composer --version  #==> ... 1.6.2 2018-01-05 15:28:4
+    ```sh
+    √ bradford-abbas.uk % checkVersions
+    PHP 7.4.0 (cli) (built: Nov 29 2019 16:18:44) ( NTS )
+    Copyright (c) The PHP Group
+    Zend Engine v3.4.0, Copyright (c) Zend Technologies
+        with Zend OPcache v7.4.0, Copyright (c), by Zend Technologies
+    Composer version 1.9.1 2019-11-01 17:20:17
+    Vagrant 2.2.6
+    VirtualBox 6.0.14r133895
+    ruby 2.6.3p62 (2019-04-16 revision 67580) [universal.x86_64-darwin19]
+    ansible 2.9.1
+      config file = None
+      configured module search path = ['/Users/iainhouston/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+      ansible python module location = /usr/local/Cellar/ansible/2.9.1/libexec/lib/python3.7/site-packages/ansible
+      executable location = /usr/local/bin/ansible
+      python version = 3.7.5 (default, Nov 30 2019, 08:22:32) [Clang 11.0.0 (clang-1100.0.33.12)]
+    NodeJS Version v13.2.0
+    npm Version 6.13.1
+    vagrant-auto_network (1.0.3, global)
+      - Version Constraint: > 0
+    vagrant-hostsupdater (1.1.1.160, global)
+      - Version Constraint: > 0
+    vagrant-vbguest (0.21.0, global)
+      - Version Constraint: 0.21
+    Developer Edition of Mozilla Firefox 72.0b1
     ```
 
     **Errors?** My experience over several years of using Drupal-VM shows that unexplained provisioning errors can often disappear after you are sure you have upgraded to the latest of each of `ansible`; `vagrant`; and `VirtalBox`.
@@ -179,23 +195,6 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
     *  Edit the output of `drush sql-dump  @balive > tmp.sql` to remove extraneous text string.   
 
     * Issues raised on Github [`rsync`](https://github.com/drush-ops/drush/issues/3306) and [`sql-sync`](https://github.com/drush-ops/drush/issues/3305)
-
-  3. **Drush Launcher:**  
-    To use `drush` globally (at `drush:~9.0`) we install the
-    [Drush Launcher](https://github.com/drush-ops/drush-launcher)
-    instead of the  `drush` php executable which is locally installed
-    in the `vendor` directory.  (See [next section](#dlaunch))
-
-
-<a name=dlaunch>Drush Launcher</a>
----------
-
-In `vm/config.yml` we declare the *launcher* as the executable rather than the `drush` executable itself
-
-```
-drush_launcher_version: "0.5.0"
-drush_phar_url: https://github.com/drush-ops/drush-launcher/releases/download/{{ drush_launcher_version }}/drush.phar
-```
 
 It's pretty much as simple as that. OK, well, we also needed to convert
 our alias files into `.yml`. The conversion command didn't work
@@ -259,13 +258,13 @@ This step is required before we can provision the live server with all the softw
 
 3. On EC2 server: remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
 
-4. On local control machine: Create `vendor/geerlingguy/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new
+4. On local control machine: Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new
 admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
 
 5. On local control machine: run the 'init' playbook.
 
   ```
-  ansible-playbook -i vm/inventory vendor/geerlingguy/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
+  ansible-playbook -i vm/inventory vendor/iainhouston/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
   ```
 
   We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.
@@ -294,16 +293,15 @@ To use an extra ansible task file, configure the path to the file (relative to `
 Run the provisioning playbook
 -----------
 
-```
+```sh
 DRUPALVM_ENV=prod ansible-playbook \
--i vm/inventory vendor/geerlingguy/drupal-vm/provisioning/playbook.yml \
--e "config_dir=$(pwd)/vm" \
+vendor/iainhouston/drupal-vm/provisioning/playbook.yml \
 --become --ask-become-pass \
 --ask-vault-pass
+--inventory-file=vm/inventory \
+--extra-vars="config_dir=$(pwd)/vm" \
+--skip-tags=test_only \
+--become --ask-become-pass --ask-vault-pass
 ```
 
-
-A note about provisioning a staging server
---------------------------------
-
-Couldn't make Drupal VM deal with `DRUPALVM_ENV=staging` and `staging.inventory` etc. so we're sticking to a `DRUPALVM_ENV=prod`-only approach and will switch staging->live in due course either by provisioning a new EC2 server or just reprovisioning this one after having changed relevant `inventory` settings and `prod.config.yml` and DNS settings.
+Note that we don't use `--tags=drupal`, because, in this case,  we require *all* the Provisioning tasks to be run.
