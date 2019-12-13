@@ -1,8 +1,10 @@
 ---
 layout: post
 title:  "Developing and maintaining a Drupal site with Drupal-VM"
-date:   2019-12-11
-categories: devops Drupal
+categories:
+  - "devops"
+  - "Drupal"
+
 permalink: /drupalbapc/
 ---
 
@@ -24,14 +26,37 @@ We use Drupal-VM to keep our *development* and *live* sites' environments exactl
 The following describes our use of Drupal-VM using the `refactorvm`
  branch of our GitHub repo  [iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk)
 
-The major section  [Important Drupal-VM configuration files](#VMconfig) below gives further information about our oparticular use of Drupal-VM so that you can see how I've used Drupal-VM to build and maintain [our website here at bradford-abbas.uk](https://bradford-abbas.uk).
+The major section  [Important Drupal-VM configuration files](#VMconfig) below gives further information about our oparticular use of Drupal-VM so that you can see how I've used Drupal-VM to build and maintain [our website here at bradford-abbas.uk](https://bradford-abbas.uk).  
 
-Typical use caases
---------------------
+There is very little (a couple? of Ansible string variables in `vm/*config.yml` with website names) that are peculiar to Bradford Abbas Parich Council. Everything else that follows could be used to build a Parich Council website that conforms to the [Transparency Code for Smaller Authorities](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/388541/Transparency_Code_for_Smaller_Authorities.pdf) which came into law in 2014.  
+
+
+Applicability to other UK Parish Councils
+-----------------------------------------
+
+Another Parish Council could fork our GitHub repo and follow the steps below to buid their own website and manage their own Meetings, Agendas, Minutes and other Documents; distribute News Articles; summons Councillors to attend Mettings and so on.  
+
+Costs
+------
+
+Drupal-VM uses only [free, Open Source software](#required_soft). The inescapable costs of our website are:  
+
+*  the small monthly cost of the Amazon EC2 web server;
+
+*  the annual renewal of our domain name;
+
+*  the annual renewal of our SSL Certificate;
+
+*  the annual renewal of our data protection (ICO) certificate which we'd need even if we didn't have a website.
+
+Typical use cases
+==================
 
 There are three typical use cases that use  steps described in one or more of the major sections  below.
 
-1.  Most typically, after a security update to a Drupal core or contributed module, or an update we've made to our Drupal theme:
+1.  Most typically, deploying updates to the live server
+
+    Deploying updates to the live server after having applied a security update to a Drupal core or contributed module, or an update we've made to our Drupal theme:
 
     1.  Set up the local development environment. We only need to do this once on a Mac where we haven't been doing our website's development work before.  
 
@@ -169,10 +194,6 @@ So you run `updateLiveCode` to deploy to the live server after any of these have
 
 Development:
 ===============
-
-
-
-Just a few notes to expand on Jeff's excellent directions:
 
 
 Provisioning the development site
