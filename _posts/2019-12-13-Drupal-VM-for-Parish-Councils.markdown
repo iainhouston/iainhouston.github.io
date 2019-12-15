@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Drupal-VM for any Parish Council"
+categories: ["Building a Council website", "DevOps"]
 ---
 
 # Drupal-VM for any Parish Council
