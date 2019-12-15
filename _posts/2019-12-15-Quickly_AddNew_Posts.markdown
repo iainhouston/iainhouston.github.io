@@ -10,7 +10,17 @@ Quickly add a new post
 
 There must be a million scripts written by Jekyll bloggers to create a new post in the format Jekyll requires.
 
-Here's mine; which obviously needs to be updated to accept arguments for parameter variables that are currently hard coded. Just represents a bit of digging into `zsh`'s' Parameter Expansion functionality.
+Here's mine; which obviously will be updated to:
+
+1.  accept arguments for parameter variables that are currently hard coded,
+
+1.  use an environment variable to record usual `BLOGPATH`,
+
+1.  accept a different `BLOGPATH` as an optional override argument,
+
+
+
+As is, it represents a bit of digging into `zsh`'s' Parameter Expansion functionality; which I later ditched in favour of `regexp-replace`. Why?
 
 ```sh
 #!/bin/zsh
@@ -36,6 +46,6 @@ layout: post
 $TITLE
 ===============
 
-Your text about ${TITLE} starts here
+Text about ${TITLE} starts here
 EOF
 ```
