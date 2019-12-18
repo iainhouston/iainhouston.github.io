@@ -19,8 +19,10 @@ Here's mine; which obviously will be updated to:
 1.  accept a different `BLOGPATH` as an optional override argument,
 
 
-
 As is, it represents a bit of digging into `zsh`'s' Parameter Expansion functionality; which I later ditched in favour of `regexp-replace`. Why?
+
+Please see an upcoming post describing why or how I switched back to using `zsh`'s parameter expansion expressions.
+
 
 ```sh
 #!/bin/zsh
