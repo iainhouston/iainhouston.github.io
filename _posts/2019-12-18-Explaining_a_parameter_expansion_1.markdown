@@ -1,8 +1,8 @@
 ---
-title: Explaining a parameter expansion - Part 1
+title: Making a post - Part 1 - Explaining a parameter expansion
 date: 2019-12-18 18:05:26
 layout: post
-categories: ["Devops", "Shell scripting"]
+categories: ["Scripting", 'Blog']
 ---
 
 Explaining a parameter expansion - Part 1

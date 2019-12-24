@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Use "tmutil" to Restore files from Time Machine
-categories: ["System Administration"]
+categories: ["DevOps"]
 ---
 
 Time Machine\'s GUI is great for your applications\' documents; but,

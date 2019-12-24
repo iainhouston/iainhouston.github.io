@@ -1,7 +1,7 @@
 ---
-title: Quickly add a new post
+title: Quickly add a new post - naïve shell script
 date: 2019-12-15 14:49:10
-categories: ["Blogging"]
+categories: ["Blog", 'Scripting']
 layout: post
 ---
 
