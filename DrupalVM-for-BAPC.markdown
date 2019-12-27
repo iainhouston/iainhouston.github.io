@@ -278,26 +278,34 @@ These steps are required before we can run Ansible to automatically provision th
 
 1. Store the one-time-generated security key pair associated the AWS EC2 Server in `~/.ssh/BAPC-2.pem`
 
-2. Enable `root` login on EC2 server. This assumes that we have the AWS EC2 server account's private key in `~/.ssh/BAPC-2.pem` on the Mac
+2. On EC2 server: Install Python (and editor).
 
-    ```
-    ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem # from local
-    sudo emacs /root/.ssh/authorized_keys # on remote
+    Ansible needs this to work its provisioning magic. (Install `emacs` or your favourite editor). Python most probably will have been installed as part of the Ubuntu Linux distro.  
+    
+    The following assumes that we have the AWS EC2 server account's  key pair in `~/.ssh/BAPC-2.pem` on the Mac
+    
+    ```sh
+    ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem  # from local
+    sudo apt install emacs25-nox python               # on remote
     ```  
 
-3. On EC2 server: Install Python (and editor).
+3. Enable `root` login on EC2 server. 
 
-    Ansible needs this to work its provisioning magic. `sudo apt install python` installs Python 2.7 (and `emacs` if you're not comfortable with `vi`).
+    * Log in using the user automatically created when AWS launched the EC2 server (`ubuntu`)
 
-4. On EC2 server: remove the preamble  
+      ```sh
+      ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem # from local
+      sudo emacs /root/.ssh/authorized_keys # on remote
+      ```  
+    * Remove the preamble  
 
       remove the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys`
 
-5. On local control machine: Create `vars.yml`
+4. On local control machine: Create `vars.yml`
 
       Create `vendor/iainhouston/drupal-vm/examples/prod/bootstrap/vars.yml` per the tutorial creating a new admin account (`webmaster`) on the server with the password recorded in `Vault PW` here on the Mac.
 
-6. On local control machine: run the 'init' playbook.  
+5. On local control machine: run the 'init' playbook.  
 
     ```
     ansible-playbook -i vm/inventory vendor/iainhouston/drupal-vm/examples/prod/bootstrap/init.yml -e "ansible_ssh_user=root"
@@ -305,7 +313,7 @@ These steps are required before we can run Ansible to automatically provision th
 
     We should now have created `webmaster` and be able to `ssh webmaster@remote.server.uk` and thence `sudo`  things using the password recorded in `Vault PW` here on the Mac.  
 
-7. On EC2 server:  revert the preamble
+6. On EC2 server:  revert the preamble
 
     revert the preamble before the string `ssh-rsa` in `/root/.ssh/authorized_keys` to prevent anyone logging into `root` directly.
 
