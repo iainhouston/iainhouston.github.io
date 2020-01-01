@@ -281,15 +281,15 @@ These steps are required before we can run Ansible to automatically provision th
 2. On EC2 server: Install Python (and editor).
 
     Ansible needs this to work its provisioning magic. (Install `emacs` or your favourite editor). Python most probably will have been installed as part of the Ubuntu Linux distro.  
-    
+
     The following assumes that we have the AWS EC2 server account's  key pair in `~/.ssh/BAPC-2.pem` on the Mac
-    
+
     ```sh
     ssh ubuntu@remote.server.uk -i ~/.ssh/BAPC-2.pem  # from local
     sudo apt install emacs25-nox python               # on remote
     ```  
 
-3. Enable `root` login on EC2 server. 
+3. Enable `root` login on EC2 server.
 
     * Log in using the user automatically created when AWS launched the EC2 server (`ubuntu`)
 
@@ -351,6 +351,24 @@ vendor/iainhouston/drupal-vm/provisioning/playbook.yml \
 Note that we don't use `--tags=drupal`, because, in this case,  we require *all* the Provisioning tasks to be run.
 
 <a name="VMconfig"></a>
+
+Ad hoc backups of critical datasets
+===================================
+
+On the Live Server (`webmaster` account):
+
+```
+/usr/local/bin/drush -r /var/www/drupal/web sql:dump \
+--result-file=../bradford-abbas.uk.sql 
+
+/usr/bin/s3cmd sync  \
+/var/www/drupal/web/sites/default/files/ \
+s3://bradford-abbas.uk.files --exclude-from=/var/www/drupal/web/../.s3ignore
+
+/usr/bin/s3cmd put  \
+/var/www/drupal/bradford-abbas.uk.sql \
+s3://bradford-abbas.uk.db
+```
 
 Important Drupal-VM configuration files
 ======================
