@@ -239,7 +239,7 @@ I do my development on a Mac but Jeff describes [here](http://docs.drupalvm.com/
 
 3. **Drush:**
 
-    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally installed `drush` that is aliased to the `vendor/bin` directory on the host machine; uses `<project root>/drush/sites` locally for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in both host and guest machines - i.e. in MacOS host and Linux guest VM -  we know we're at exactly the same `drush` relesase: host (a.k.a.controller); dev server; and live server.
+    Getting `drush` right has taken a lot of my bandwidth over various releases. I now take the approach of using a single, locally installed `drush` that is aliased to the `vendor` directory on the host machine; uses `<project root>/drush/sites` locally for this website's aliases, and, because NFS has the devlopment server accessing exacly the same `drush` binary for execution in both host and guest machines - i.e. in MacOS host and Linux guest VM -  we know we're at exactly the same `drush` relesase: host (a.k.a.controller); dev server; and live server.
 
 
 Encrypted secrets
@@ -344,8 +344,7 @@ vendor/iainhouston/drupal-vm/provisioning/playbook.yml \
 --ask-vault-pass
 --inventory-file=vm/inventory \
 --extra-vars="config_dir=$(pwd)/vm" \
---skip-tags=test_only \
---become --ask-become-pass --ask-vault-pass
+--skip-tags=test_only 
 ```
 
 Note that we don't use `--tags=drupal`, because, in this case,  we require *all* the Provisioning tasks to be run.
