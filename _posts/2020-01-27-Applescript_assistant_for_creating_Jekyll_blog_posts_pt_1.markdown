@@ -2,6 +2,7 @@
 title: Applescript assistant for creating Jekyll blog posts (pt 1)
 date: 2020-01-27 23-48-15
 layout: post
+comments: true
 categories: ['Scripting']
 ---
 

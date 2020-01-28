@@ -33,6 +33,9 @@ header_pages:
   - about.md
   - Categories.markdown
 
+disqus:
+    shortname: iain-houstons-web-log
+
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
