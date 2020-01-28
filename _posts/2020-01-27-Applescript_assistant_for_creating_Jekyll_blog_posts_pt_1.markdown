@@ -8,7 +8,7 @@ categories: ['Scripting']
 Applescript assistant for creating Jekyll blog posts (pt 1)
 ===============
              
-```osascript           
+```applescript           
 -- We keep three persistent settings in `makepost.plist`:
 global chosenBlogPath, chosenCategories, chosenScriptFilePath
 
