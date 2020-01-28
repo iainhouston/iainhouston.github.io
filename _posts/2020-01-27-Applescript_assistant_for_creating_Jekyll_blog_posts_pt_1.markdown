@@ -1,22 +1,21 @@
 ---
-title: Applescript assistant for creating Jekyll blog posts (pt 1)
+title: Applescript Jekyll assistant (pt 1)
 date: 2020-01-27 23-48-15
 layout: post
 comments: true
 categories: ['Scripting']
 ---
 
-Applescript assistant for creating Jekyll blog posts (pt 1)
------------------------------------------------------------
-
 Introduction
 ============
 
-I'm posting chunks of the Applescript as I develop it. This will encourage me to add more explanatory comments in the script than I might otherwise do.
+I'm posting chunks of the Applescript as I develop it. This will encourage me to add more explanatory comments in the script than I might otherwise do. 
 
-Although this is my adventure into Applescript, it is not a stab in the dark, as I already have a working version of the Applescript. These posts record the process of refactoring  the working script as I learn more about the language. 
+My aim is to share things I've discovered about Applescript.
 
-For example, today's chunk addresses where we persist the user's preferences / settings between blog post creation sessions.
+I already have a working version of the Applescript Jekyll assistant. This series of posts record the process of refactoring  the working script as I discover ways of making the Applescript simpler. 
+
+For example, today's chunk addresses macOS's using `plist` to persist the user's preferences / settings between blog post creation sessions.
 
 References
 ==========
