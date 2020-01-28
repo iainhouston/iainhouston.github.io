@@ -1,5 +1,5 @@
 ---
-title: How to "Open in Script Editor"
+title: How to have your AppleScript "Open in Script Editor"
 date: 2020-01-28 09-23-38
 layout: post
 comments: true
@@ -14,8 +14,8 @@ This is what I discovered (read back to front if you like!):
 
 	````
 	<a href = "applescript://com.apple.scripteditor?action=new&script=
-	"your script" 
-	>Click to open in Script Editor</a>
+	your script 
+	">Click to open in Script Editor</a>
 	````
 	
 2.	where `your script` above is URL encoded    
@@ -37,7 +37,7 @@ So: tasks in order:
 
 2.	URL Encode  
 
-3.	Paste URL encoded text between "quotes" into the `a` tag
+3.	Paste URL encoded text between the `...new&script=` and the `">...` in the `a` tag above
 
 
 To Do
