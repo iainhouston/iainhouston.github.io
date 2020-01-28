@@ -7,6 +7,15 @@ categories: ['Scripting']
 
 Applescript assistant for creating Jekyll blog posts (pt 1)
 ===============
+
+Introduction
+-------------
+
+I'm posting chunks of the Applescript as I develop it. This will encourage me to add more explanatory comments in the script than I might otherwise do.
+
+Although this is my adventure into Applescript, it is not a stab in the dark, as I already have a working version of the Applescript. These posts record the process of refactoring  the working script as I learn more about the language. 
+
+For example, today's chunk addresses where we persist the user's preferences / settings between blog post creation sessions.
              
 ```applescript           
 -- We keep three persistent settings in `makepost.plist`:
