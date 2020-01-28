@@ -7,8 +7,8 @@ categories: ['Scripting']
 
 Applescript assistant for creating Jekyll blog posts (pt 1)
 ===============
-
-'''osascript
+             
+```osascript           
 -- We keep three persistent settings in `makepost.plist`:
 global chosenBlogPath, chosenCategories, chosenScriptFilePath
 
@@ -83,4 +83,4 @@ on FileExists(theFile) -- (String) as Boolean
 		end if
 	end tell
 end FileExists
-'''
+```      
