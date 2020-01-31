@@ -3,9 +3,13 @@ title: How to have your AppleScript "Open in Script Editor"
 date: 2020-01-28 09-23-38
 layout: post
 comments: true
+permalink:  PreURLEncodeAppleScript
 categories: ['Scripting']
 ---
 
+[Edit] I have made a *Folder Action* that does this automatically when you **Export as Text** an ApplScript from the *Script Editor*. [See this post](/URLEncodeAppleScript)
+
+[OP]
 I was wondering how people show their AppleSript in their web pages and, by clicking a link, have it open in your Mac's Script Editor.
 
 This is what I discovered (read back to front if you like!):
@@ -39,8 +43,3 @@ So: tasks in order:
 
 3.	Paste URL encoded text between the `...new&script=` and the `">...` in the `a` tag above
 
-
-To Do
------  
-
-See how to make the displayed code the link, rather than separate the link from the code as I have done here.
