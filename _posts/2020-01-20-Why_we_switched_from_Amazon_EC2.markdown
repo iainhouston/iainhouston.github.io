@@ -2,7 +2,8 @@
 title: Why we switched from Amazon EC2
 date: 2020-01-20 10-35-53
 layout: post
-categories: ['Blog', 'DevOps', 'Drupal']
+comments: true
+categories: [ 'DevOps']
 ---
 
 Why we switched from Amazon EC2

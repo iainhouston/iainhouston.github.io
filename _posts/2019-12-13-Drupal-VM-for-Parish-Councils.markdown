@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Drupal-VM for any Parish Council"
-categories: ["Parish Councils", "DevOps"]
+categories: ["Parish Councils", "Drupal"]
 ---
 
 # Drupal-VM for any Parish Council

@@ -2,7 +2,7 @@
 title: Applescript Jekyll assistant (pt 2)
 date: 2020-01-31 18-27-11
 layout: post
-comments: false
+comments: true
 categories: ['Scripting']
 ---
 
