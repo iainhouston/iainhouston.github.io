@@ -3,7 +3,7 @@ title: Applescript Jekyll assistant (pt 2)
 date: 2020-01-31 18-27-11
 layout: post
 comments: true
-categories: ['Scripting']
+categories: ['Scripting', "Blog"]
 ---
 
 Following on from [Applescript Jekyll assistant (pt 1)](/scripting/2020/01/27/Applescript_assistant_for_creating_Jekyll_blog_posts_pt_1.html) we're using a `.plist` to record the properties of the users' blog posts that persist for the lifetime of the blog.

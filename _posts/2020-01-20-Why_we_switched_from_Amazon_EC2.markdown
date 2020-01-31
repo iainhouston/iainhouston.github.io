@@ -3,7 +3,7 @@ title: Why we switched from Amazon EC2
 date: 2020-01-20 10-35-53
 layout: post
 comments: true
-categories: [ 'DevOps']
+categories: [ 'DevOps', "Parish Councils"]
 ---
 
 Why we switched from Amazon EC2
