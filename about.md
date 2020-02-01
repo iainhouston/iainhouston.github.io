@@ -47,24 +47,30 @@ four or five years later in 2003 - led by my successor at IBM, Ian Robinson.
 
 ### Alumnus of the University of Oxford
 
-I have an MSc in Computing Science (a.k.a in 1988 as *Computation*) from the University of Oxford.
+I have an MSc in Computing Science (a.k.a in 1988 as *Computation*) from the University of Oxford. Prof. Tony Hoare and Dr. Mark Josephs were my dissertation supervisors. Dr. Ib Sørensen was a good friend and mentor to whom I owe a great deal.
 
-#### A word about Specifications
+## A word about Specifications
 
 No program can really be considered to "work" unless there is some
 specification against which to measure its behaviour.
 
-The most important thing about a specification is that the team -
-including the clients and developers - share, as near is possible, a single idea idea
-of what it is they are developing.
+The most important thing about a specification is that all the stakeholders -
+including the clients and developers - share, as nearly is possible, a single idea idea
+of what it is being developed.
 
-I have worked with different teams that use everything to make a
+I have worked with different development teams that use anything to make a
 specification from a file of *Keynote* or *Powerpoint* diagrams through
 *UML* to the more formal and precise English of a specification in the
 *Z* notation.
 
-<a id=music>
+<a name="music"></a>
 # Music 
+
+I play tenor and soprano saxes, have been fortunate enough to have played music with some amazing musicians and have promoted jazz performances for many years in both Southampton and Sherborne.
+
+My saxophone heros are John Coltrane, Bob Berg and Mark Lockheart.
+
+### History
 
 I've had a passion for music which I can trace back before hearing Jelly Roll Morton and the Red Hot Peppers' *Doctor Jazz* in the jazz wave of the 1950's and 1960's.
 
