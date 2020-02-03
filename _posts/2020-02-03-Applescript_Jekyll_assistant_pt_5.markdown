@@ -19,9 +19,8 @@ Questions arising from this exercise:
 
 3.	Would we have been better off doing most of our stuff in a Python program and calling it from a minimal AppleScript that mostly dealt with the inter-application Apple Events?
 
-Image of end result with body text selected to edit:  
-
 ![Image of end result](/assets/images/Screenshot_2020-02-03_at_11_36.png)
+*Image of end result with body text selected, ready to edit*
 
 
 <a href = "applescript://com.apple.scripteditor?action=new&script=
