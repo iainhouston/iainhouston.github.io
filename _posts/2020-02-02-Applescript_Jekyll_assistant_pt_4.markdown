@@ -3,7 +3,7 @@ title: Applescript Jekyll assistant (pt 4)
 date: 2020-02-02 06-02-32
 layout: post
 comments: false
-categories: ['Scripting']
+categories: ['Scripting', 'Blog']
 ---
 
 In which we:

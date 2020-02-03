@@ -3,7 +3,7 @@ title: Applescript Jekyll assistant (pt 5)
 date: 2020-02-03 11-32-27
 layout: post
 comments: false
-categories: ['Scripting']
+categories: ['Scripting', 'Blog']
 ---
 
 In which we finally get to create our blog post and open it in BBEdit.
