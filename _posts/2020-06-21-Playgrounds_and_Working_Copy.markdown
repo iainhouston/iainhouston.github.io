@@ -34,4 +34,4 @@ The version-controlled Playground is there with its Swift icon - **that’s reas
  
 Repeat from 2. above
 
-![Save dialogue from Working Copy](/assets/images/saving_playground.jpeg)
+![Save dialogue from Working Copy](/assets/images/saving_playground.jpeg){:width="60%"}
