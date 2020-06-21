@@ -1,8 +1,8 @@
 ---
 title: Developing on an iPad Pro
-date: 2020-06-21 15-45-00
+date: 2020-06-20 15-45-00
 layout: post
-comments: false
+comments: true
 categories: ['Programming', 'Blog', 'DevOps']
 ---
 
