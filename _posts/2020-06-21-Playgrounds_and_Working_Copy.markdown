@@ -13,10 +13,11 @@ I am using Working Copy for a number of tasks, and one I am keen to develop more
 
 BTW I am writing this post to my iainhouston.github.io account using the built-in editor of Working Copy. Commit; Push; and its published.
 
-~~~The author Anders' [documentation](https://workingcopyapp.com/manual/extending-ios) is very thorough, however I had a few problems when trying to manage commits of my Swift Playground.~~~
+I had a few problems when trying to manage commivversion-control my Swift Playgrounds.
 
-***Testimonial***
-In the time it took me to write a reasonably detailed description of my issue to the author, and post a summary of it here (since deleted), he, Anders Borum, got back to me with a simpler solution, and a promise to amend the (already excellent in all other respects, [documentation](https://workingcopyapp.com/manual/extending-ios).
+***Testimonial***  
+
+In the time it took me to write a reasonably detailed description of my issue to the author, and post a summary of it here together with my workaround solution (since deleted), he, Anders Borum, got back to me with a simpler solution, and a promise to amend the (already excellent in all other respects), [documentation](https://workingcopyapp.com/manual/extending-ios) for which I am grateful, and very impressed.
 
 ***Simplest solution***
 
