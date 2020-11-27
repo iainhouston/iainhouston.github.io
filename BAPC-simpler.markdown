@@ -10,10 +10,10 @@ permalink: /simplerbapc/
 ---
 
 The three servers: Live, Staging, Development
-=============================================
+---------------------------------------------
 
 The Development Server
-----------------------
+======================
 
 This runs on an Ubuntu virtual guest machine on the Mac host.  
 
