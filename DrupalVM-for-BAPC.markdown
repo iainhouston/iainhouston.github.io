@@ -140,7 +140,13 @@ Set up the local development environment
 
     `vagrant up` will also provision the VM if it does not previously exist, otherwise Vagrant will just boot it up and manage the IP Addresses in `/etc/hosts` and the NFS shared directories in `/etc/exports`
 
-8.  Sync the Live Drupal to the Development Drupal  
+8.  Now `vagrant ssh` and accept the authenticity of the newly-created host / vagrant server. (If you don't do this, the next step will fail.)
+
+    `exit` the vagrant server to return to your Mac.
+
+9.  Ensure that the drush aliases for the live and development servers in `./drush/sites` are correct
+
+10.  Sync the Live Drupal to the Development Drupal  
 
     `cloneLive2Dev` clones the live database and the static files (uploaded images, PDFs etc.) to the development Drupal in the VM.
 
@@ -148,17 +154,11 @@ Set up the local development environment
 
     For this reason, too, `cloneLive2Dev`  `rsync`s the static files from `wpbapc`'s access in the live server to the controlling host's `/web/sites/default/files/` rather than using `drush core:rsync`. NFS makes these files immediately available to the development server's VM.  
 
-9.  Make changes to the site's Theme
+11.  Make changes to the site's Theme
 
-    *  Verify you have `NodeJS` installed per [Required Software](#required_soft)above
+    We have just (June 2020) changed from our own bespoke theme to a si=ubtheme of `drupal/olivero` which is `web/themes/contrib/pellucid_olivero`
 
-    *  `cdt` will change directories to `web/themes/contrib/pellucid_monoset`
-
-    *  From `web/themes/contrib/pellucid_monoset` do `npm install` to install a local `gulp` (a `NodeJS` based toolchain)
-
-    *  `npx gulp` will use the locally-installed `gulp` to fire up Firefox and  `BrowserSync` and inject CSS into Firefox-rendered pages as gulp watches for changes to various source files and automatically triggers Sass compiles and `drush` cache clears as appropriate.  
-
-    Our Druopal Theme module - `iainhouston/pellucid_monoset` - in `web/themes/contrib/pellucid_monoset` is under version control separately from `iainhouston/bradford-abbas.uk`. A git tag must be pushed to GitHub when a new version is developed to ensure that this latest version is picked up when `composer update iainhouston/pellucid_monoset` is run next in the project folder `~/bradford-abbas.uk`
+    We are aiming not to use any styling toolchain (gulp, postcss etc.) to keep things really simple with just straight-ahead CSS.
 
 
 [//]: # (' Markdown workaround)
@@ -344,7 +344,7 @@ vendor/iainhouston/drupal-vm/provisioning/playbook.yml \
 --ask-vault-pass
 --inventory-file=vm/inventory \
 --extra-vars="config_dir=$(pwd)/vm" \
---skip-tags=test_only 
+--skip-tags=test_only
 ```
 
 Note that we don't use `--tags=drupal`, because, in this case,  we require *all* the Provisioning tasks to be run.
@@ -358,7 +358,7 @@ On the Live Server (`webmaster` account):
 
 ```
 /usr/local/bin/drush -r /var/www/drupal/web sql:dump \
---result-file=../bradford-abbas.uk.sql 
+--result-file=../bradford-abbas.uk.sql
 
 /usr/bin/s3cmd sync  \
 /var/www/drupal/web/sites/default/files/ \
