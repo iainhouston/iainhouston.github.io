@@ -86,6 +86,12 @@ As I said above, the *Staging Server* is really only used when we have to change
 Rent a new server from a hosting company and provision it. Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a virtual Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the DNS mapping for `staging.bradford-abbas.uk`. 
  
  Instructions in the `staging` directory will tell you how to provision a staging server. 
+ 
+During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
+
+As soon as you're happy that the Staging Server is behaving properly, compared  to the Live Server, then switch the DNS A records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the A record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
+
+### Using the  Live Server
 
 
 
