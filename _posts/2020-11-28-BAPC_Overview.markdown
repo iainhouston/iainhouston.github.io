@@ -54,11 +54,28 @@ We do this as follows:
     
     -  exports shellvariables and sets aliases for utilty commands  
     
-    `cdba9dev` is defined in `~/.zshrc` as follows !!!!  
+    `cdba9dev` is defined in `~/.zshrc` as follows:  
+    
+    `alias cdba9dev="cd ${HOME}/bradford-abbas.uk && source ./scripts/badev/dev_aliases.sh"`  
     
 2.  we run `cloneLiveToDev` to populate the Development Server's database and static files from the Live Server.
 
-We can now brows the Development version of the Parish Council website using the URL shown in the commentary generated from the `vagrant up` step above.
+We can now browse the Development version of the Parish Council website using the dashboard URL shown in the commentary generated from the `vagrant up` step above. The dashboard page is the launching page for:  
+
+-  the development version of the Parish Council website itself  
+
+-  `adminer`: web-based access to the development database  
+
+-  `pimpmylog`: web-based access to the development Apache httpd and other logs  
+
+-  `mailhog`: web-based email client intercepting and receiving all email messages sent out  from the development version of the Paridh Council website.  
+
+
+As a browser, I use the Firefox Developer Edition; its developer tools for inspecting html and css are extremely powerful and usable. It has good javascript debugging tools although I rarely use these.
+
+I also use the PHP `XDEBUG` plugin in Firefox to toggle debugging sessions on and off.
+
+I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` to be the most reliable and useable. `PHPStorm` is probably worth the annual subscription if you're planning to do any programming and debugging in your own or others' contributed modules and themes.
 
 
 
