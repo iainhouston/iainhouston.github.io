@@ -30,13 +30,13 @@ When we change to the project directory (`~/bradford-abbas.uk`) we then `vagrant
     
     -  It is allocated an IP Address and URL in `/etc/hosts` 
     
-    -  It has the latest PHP code from Drupal and  contributed both by us and from others
+    -  It has the latest PHP code from Drupal and code contributed both by us and by others
     
     -  It has an (as yet empty) MySQL database for the Drupal CMS  
     
 2.  Shares our (host) project directory with the `/var/www/drupalvm` directory of the (guest)  virtual development server.  
 
-This is so that we can use `git` and an IDE / editor like `PHPStorm` to manage changes to the program code and configuration settings in the host development environment whilst, at the same time, this code and those settings can be served by Apache HTTP Server ("httpd") as a website on the virtual development server.
+Shared folders allow us to see exactly the same files from within the guest Linux as from the host Mac. This is so that we can use an IDE / editor like `PHPStorm` to manage changes to the program code and configuration settings in the host development environment whilst, at the same time, this code and those settings can be served by Apache HTTP Server ("httpd") as a website from within the virtual development server.
 
 Although we do sometimes `ssh` into the virtual development machine, it would not be practicable to run an IDE in the Linux virtual environment - it has no GUI installed - and thus we use  Mac GUI tools to change manage the code and settings on the Mac. 
 
@@ -52,11 +52,14 @@ We do this as follows:
 
     -  `cd`'s us to the project directory (`~/bradford-abbas.uk`)  
     
-    -  exports shellvariables and sets aliases for utilty commands  
+    -  exports shell variables and sets aliases for utilty commands  
     
     `cdba9dev` is defined in `~/.zshrc` as follows:  
     
-    `alias cdba9dev="cd ${HOME}/bradford-abbas.uk && source ./scripts/badev/dev_aliases.sh"`  
+    ```bash
+    alias cdba9dev="cd ${HOME}/bradford-abbas.uk && \
+    source ./scripts/badev/dev_aliases.sh"
+    ```
     
 2.  we run `cloneLiveToDev` to populate the Development Server's database and static files from the Live Server.
 
@@ -70,8 +73,7 @@ We can now browse the Development version of the Parish Council website using th
 
 -  `mailhog`: web-based email client intercepting and receiving all email messages sent out  from the development version of the Paridh Council website.  
 
-
-The web browser I use is Firefox Developer Edition; its developer tools for inspecting html and css are extremely powerful and usable. It has good javascript debugging tools although I rarely use these.
+The web browser I use is [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/); its developer tools for inspecting html and css are extremely powerful and usable: grids and flex are well supported. Its Responsive Design Mode makes it very easy to see how web pages look on different (mobile and desktop) devices. It has good javascript debugging tools although I rarely use these. I have kept our use of Javascript to a minimum.
 
 I also use the PHP `XDEBUG` plugin in Firefox to toggle debugging sessions on and off.
 
