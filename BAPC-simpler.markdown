@@ -23,8 +23,8 @@ The Development Server
 
 This runs on an Ubuntu virtual guest machine within the Mac host.  
 
-The [repo](https://github.com/iainhouston/bradford-abbas.uk) is cloned into the *project directory*.   
-
+The [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) is cloned into the *project directory* `~/bradford-abbas.uk`.   
+ 
 When we change to the project directory (`~/bradford-abbas.uk`) we can `vagrant up` which does two things:  
 
 1.  Provisions a virtual development server
@@ -39,7 +39,7 @@ This is so that we can use `git` and an IDE / editor like `PHPStorm` to manage c
 
 Although we do sometimes `ssh` into the virtual development machine, it would not be practicable to run an IDE in the Linux virtual environment - it has no GUI installed - and thus we use  Mac GUI tools to change manage the code and settings on the Mac. 
 
-The (host) project directory is shared with the (virtual guest) web document directory's parent using NFS (Sun's Network File System).
+The (host) project directory is shared with the (virtual guest) web document directory's parent using NFS (Sun's Network File System) which is present on both the guest Linux and host MacOS's BSD Unix systems.
 
 
   
