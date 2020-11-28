@@ -1,6 +1,6 @@
 ---
 layout: page
-title:  "Developing and maintaining a Drupal site with Drupal-VM"
+title:  Developing and maintaining a Drupal site with Drupal-VM
 date:   2019-12-13
 categories:
   - "DevOps"

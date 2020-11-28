@@ -89,9 +89,27 @@ Rent a new server from a hosting company and provision it. Just edit the DNS set
  
 During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
 
-As soon as you're happy that the Staging Server is behaving properly, compared  to the Live Server, then switch the DNS A records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the A record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
+As soon as you're happy that the Staging Server is behaving properly, with respect  to the Live Server, then switch the DNS A records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the A record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
 
 ### Using the  Live Server
+
+There are two things we have to do to the Live Server on a regular basis:  
+
+1.  Update the code base and configuration settings with any changes we made and tested on the Development Server  
+
+2.  Replace the SSL certificate annually after having encrypted the new key and certificate according to the instructions in `vm/certs`  
+
+both of these are done by running `updateLiveCode` from the project directory.
+
+There's a third thing that is done automatically by the Live Server every week:  
+
+`cron` dumps the live database and static files to Amazon S3 buckets.
+
+##Further detail  
+
+[Developing and maintaining a Drupal site with Drupal-VM](/drupalbapc) describes the main files in the [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) 
+
+That page is much more detailed and likely to get out of date quite quickly.
 
 
 
