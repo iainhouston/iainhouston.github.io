@@ -4,7 +4,7 @@ date: 2020-06-20 15-45-00
 layout: post
 comments: true
 categories: ['Programming', 'Blog', 'DevOps']
----
+--- 
 
 So, I'm following @twostraws course [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui).
 
