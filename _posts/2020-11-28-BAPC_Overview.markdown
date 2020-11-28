@@ -1,6 +1,6 @@
 --- 
 layout: post  
-title:  "Overview of the Parish Council website"
+title:  Overview of the Parish Council website  
 categories: ["Parish Councils", "Drupal"]
 --- 
 
