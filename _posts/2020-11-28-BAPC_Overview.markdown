@@ -105,7 +105,7 @@ There's a third thing that is done automatically by the Live Server every week:
 
 `cron` dumps the live database and static files to Amazon S3 buckets.
 
-##Further detail  
+## Further detail  
 
 [Developing and maintaining a Drupal site with Drupal-VM](/drupalbapc) describes the main files in the [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) 
 
