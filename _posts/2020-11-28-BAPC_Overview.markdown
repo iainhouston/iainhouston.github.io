@@ -16,11 +16,11 @@ This is an overview of how we develop and maintain the Bradford Abbas Parish web
 
 -  The *Staging Server* is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
--  The *Development* Server is where we make changes to modules and settings and test that these can me safely migrated to the Live Server
+-  The *Development* Server is where we make changes to modules and settings and test that these can be safely migrated to the Live Server
 
 ## The Development Server
 
-This runs on an Ubuntu virtual guest machine within the Mac host.  
+This runs on an Ubuntu Linux virtual guest machine within the Mac host.  
 
 The [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) is cloned into the *project directory* `~/bradford-abbas.uk`.   
  
@@ -81,9 +81,23 @@ We can now browse the Development version of the Parish Council website using th
 
 The web browser I use is [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/); its developer tools for inspecting html and css are extremely powerful and usable: grids and flex are well supported. Its Responsive Design Mode makes it very easy to see how web pages look on different (mobile and desktop) devices. It has good javascript debugging tools although I rarely use these. I have kept our use of Javascript to a minimum.
 
+#### Debugging PHP code
+
 I also use the PHP `XDEBUG` plugin in Firefox to toggle debugging sessions on and off.
 
 I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` to be the most reliable and useable. `PHPStorm` is probably worth the annual subscription if you're planning to do any programming and debugging in your own or others' contributed modules and themes.
+
+#### Debugging HTML and CSS 
+
+-  `cdt` takes you to the websites theme directory
+
+-  `npm install` installs Javascript tool chain including the truly wonderful [Browsersync](https://www.browsersync.io). 
+
+-  `npx gulp` fires up the tool chain 
+
+	-  Code files are watched for changes. 
+	
+	-  `Browsersync` injects any changed CSS and publishes refreshed pages to any browsers connected in the network, so you can have several devices connected simultaneously to see how the HTML and CSS looks.
 
 ### Using the Staging Server  
 
