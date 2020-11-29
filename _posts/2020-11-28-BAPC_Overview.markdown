@@ -14,7 +14,7 @@ permalink: /bapcoverview/
 
 -  The *Staging Server* is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
--  The Development Server is where we make changes to modules and settings and test that these can me safely migrated to the Live Server
+-  The *Development* Server is where we make changes to modules and settings and test that these can me safely migrated to the Live Server
 
 ## The Development Server
 
