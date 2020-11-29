@@ -6,6 +6,8 @@ categories: ["Parish Councils", "Drupal"]
 permalink: /bapcoverview/
 --- 
 
+This is an overview of how we develop and maintain the Bradford Abbas Parish website.
+
 
 # The three servers: Live, Staging, Development
 
@@ -22,7 +24,11 @@ This runs on an Ubuntu virtual guest machine within the Mac host.
 
 The [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) is cloned into the *project directory* `~/bradford-abbas.uk`.   
  
-When we change to the project directory (`~/bradford-abbas.uk`) we then `vagrant up` which does two things:  
+When we change to the project directory (`~/bradford-abbas.uk`) we then do:  
+
+    composer install && vagrant up
+
+which does two things:  
 
 1.  Provisions a virtual development server
 
@@ -34,7 +40,7 @@ When we change to the project directory (`~/bradford-abbas.uk`) we then `vagrant
     
     -  It has an (as yet empty) MySQL database for the Drupal CMS  
     
-2.  Shares our (host) project directory with the `/var/www/drupalvm` directory of the (guest)  virtual development server.  
+2.  Shares our (host) project directory `bradford-abbas.uk` with the `/var/www/drupalvm` directory of the (guest)  virtual development server.  
 
 Shared folders allow us to see exactly the same files from within the guest Linux as from the host Mac. This is so that we can use an IDE / editor like `PHPStorm` to manage changes to the program code and configuration settings in the host development environment whilst, at the same time, this code and those settings can be served by Apache HTTP Server ("httpd") as a website from within the virtual development server.
 
@@ -48,20 +54,20 @@ As yet - after having just provisioned the Development Server - there is program
 
 We do this as follows:  
 
-1.  we run `cdba9dev` which  
+1.  we run `cdbadev` which  
 
     -  `cd`'s us to the project directory (`~/bradford-abbas.uk`)  
     
     -  exports shell variables and sets aliases for utilty commands  
     
-    `cdba9dev` is defined in `~/.zshrc` as follows:  
+    `cdba9dev` must be defined in your `~/.zshrc` as follows:  
     
     ```bash
-    alias cdba9dev="cd ${HOME}/bradford-abbas.uk && \
-    source ./scripts/badev/dev_aliases.sh"
+    alias cdbadev="cd ${HOME}/bradford-abbas.uk && \
+    source ./scripts/badev/dev_aliases.sh". 
     ```
     
-2.  we run `cloneLiveToDev` to populate the Development Server's database and static files from the Live Server.
+1.  we run `cloneLiveToDev` to populate the Development Server's database and static files from the Live Server.
 
 We can now browse the Development version of the Parish Council website using the dashboard URL shown in the commentary generated from the `vagrant up` step above. The dashboard page is the launching page for:  
 
