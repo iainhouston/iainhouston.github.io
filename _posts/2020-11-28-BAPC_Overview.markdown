@@ -60,7 +60,7 @@ We do this as follows:
     
     -  exports shell variables and sets aliases for utilty commands  
     
-    `cdba9dev` must be defined in your `~/.zshrc` as follows:  
+    `cdbadev` must be defined in your `~/.zshrc` as follows:  
     
     ```bash
     alias cdbadev="cd ${HOME}/bradford-abbas.uk && \
@@ -77,11 +77,11 @@ We can now browse the Development version of the Parish Council website using th
 
 -  `pimpmylog`: web-based access to the development Apache httpd and other logs  
 
--  `mailhog`: web-based email client intercepting and receiving all email messages sent out  from the development version of the Paridh Council website.  
+-  `mailhog`: web-based email client intercepting and receiving all email messages sent out  from the development version of the Parish Council website.  
 
 The web browser I use is [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/); its developer tools for inspecting html and css are extremely powerful and usable: grids and flex are well supported. Its Responsive Design Mode makes it very easy to see how web pages look on different (mobile and desktop) devices. It has good javascript debugging tools although I rarely use these. I have kept our use of Javascript to a minimum.
 
-#### Debugging PHP code
+#### Debugging PHP code  
 
 I also use the PHP `XDEBUG` plugin in Firefox to toggle debugging sessions on and off.
 
@@ -91,7 +91,7 @@ I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` 
 
 -  `cdt` takes you to the websites theme directory
 
--  `npm install` installs Javascript tool chain including the truly wonderful [Browsersync](https://www.browsersync.io). 
+-  `npm install` installs a Javascript tool chain including the truly wonderful [Browsersync](https://www.browsersync.io). 
 
 -  `npx gulp` fires up the tool chain 
 
@@ -101,21 +101,21 @@ I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` 
 
 ### Using the Staging Server  
 
-As I said above, the *Staging Server* is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
+As I said above, the Staging Server is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
 Rent a new server from a hosting company and provision it. Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a virtual Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the DNS mapping for `staging.bradford-abbas.uk`. 
  
  Instructions in the `staging` directory will tell you how to provision a staging server. 
  
-During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
+During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this security alert whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` (i.e. omitting `https`) otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
 
-As soon as you're happy that the Staging Server is behaving properly, with respect  to the Live Server, then switch the DNS A records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the A record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
+As soon as you're happy that the Staging Server is behaving properly, with respect to the Live Server, then switch the DNS `A` records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the `A` record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
 
 ### Using the  Live Server
 
 There are two things we have to do to the Live Server on a regular basis:  
 
-1.  Update the code base and configuration settings with any changes we made and tested on the Development Server  
+1.  Update the code base and configuration settings with any changes we made and tested on the Development Server. Most frequently, it is security updates to Drupal core and contributed modules that cause us to update the code base using `composer`.  
 
 2.  Replace the SSL certificate annually after having encrypted the new key and certificate according to the instructions in `vm/certs`  
 
@@ -129,7 +129,7 @@ There's a third thing that is done automatically by the Live Server every week:
 
 [Developing and maintaining a Drupal site with Drupal-VM](/drupalbapc) describes the main files in the [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk) 
 
-That page is much more detailed and likely to get out of date quite quickly.
+*That* page is much more detailed than this post and is currently in need of updates to those details. This post is more likely to remain current.
 
 
 
