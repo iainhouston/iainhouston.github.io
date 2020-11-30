@@ -79,9 +79,9 @@ We can now browse the Development version of the Parish Council website using th
 
 -  `mailhog`: web-based email client intercepting and receiving all email messages sent out  from the development version of the Parish Council website.  
 
-The web browser I use is [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/); its developer tools for inspecting html and css are extremely powerful and usable: grids and flex are well supported. Its Responsive Design Mode makes it very easy to see how web pages look on different (mobile and desktop) devices. It has good javascript debugging tools although I rarely use these. I have kept our use of Javascript to a minimum.
+The web browser I use is [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/); its developer tools for inspecting html and css are extremely powerful and usable: grids and flex are well supported. Its Responsive Design Mode makes it very easy to see how web pages look on different (mobile and desktop) devices. It has good javascript debugging tools although I rarely use these. I have kept our use of Javascript to a minimum.  
 
-#### Debugging PHP code  
+#### Debugging PHP code  
 
 I also use the PHP `XDEBUG` plugin in Firefox to toggle debugging sessions on and off.
 
