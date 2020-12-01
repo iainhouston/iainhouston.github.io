@@ -63,8 +63,7 @@ We do this as follows:
     `cdbadev` must be defined in your `~/.zshrc` as follows:  
     
     ```bash
-    alias cdbadev="cd ${HOME}/bradford-abbas.uk && \
-    source ./scripts/badev/dev_aliases.sh". 
+    alias cdbadev="cd ${HOME}/bradford-abbas.uk && source SYMBOLS.sh". 
     ```
     
 1.  we run `cloneLiveToDev` to populate the Development Server's database and static files from the Live Server.
