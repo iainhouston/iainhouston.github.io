@@ -14,9 +14,9 @@ I'm still working on this. Apologies for yet incomplete bits.
 Introduction
 ============
 
-I used [our fork of Jeff Geerling's Drupal-VM](https://github.com/iainhouston/drupal-vm) to create both a local development Drupal server and a live production server very much along the lines of his tutorial which he wrote for Drupal MidCamp in March 2017. So you might like to go [there](https://www.jeffgeerling.com/blog/2017/soup-nuts-using-drupal-vm-build-local-and-prod) if I have omitted a detail you want to follow.
+I used [Jeff Geerling's Drupal-VM](https://github.com/geerlingguy/drupal-vm) to create both a local development Drupal server and a live production server very much along the lines of his tutorial which he wrote for Drupal MidCamp in March 2017. So you might like to go [there](https://www.jeffgeerling.com/blog/2017/soup-nuts-using-drupal-vm-build-local-and-prod) if I have omitted a detail you want to follow.
 
-We use Drupal-VM to keep our *development* and *live* sites' environments exactly in sync.
+We use Drupal-VM to keep our *Development*, *Staging*, and *Live* sites' environments exactly in sync.
 
 -  The operating system is at exactly the same level
 
@@ -36,7 +36,7 @@ Applicability to other UK Parish Councils
 
 Another Parish Council could fork our GitHub repo and follow the steps below to buid their own website and manage their own Meetings, Agendas, Minutes and other Documents; distribute News Articles; summons Councillors to attend Mettings and so on.  
 
-There is very little (a couple? of Ansible string variables in `vm/*config.yml` with website names) that are peculiar to Bradford Abbas Parish Council. Everything else that follows could be used to build a Parish Council website that conforms to the [Transparency Code for Smaller Authorities](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/388541/Transparency_Code_for_Smaller_Authorities.pdf) which came into law in 2014.   
+There is very little, like website names, that are peculiar to Bradford Abbas Parish Council. Everything else that follows could be used to build a Parish Council website that conforms to the [Transparency Code for Smaller Authorities](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/388541/Transparency_Code_for_Smaller_Authorities.pdf) which came into law in 2014.   
 
 Costs
 ------

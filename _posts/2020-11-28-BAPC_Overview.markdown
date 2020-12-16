@@ -12,7 +12,7 @@ This is an overview of how we develop and maintain the Bradford Abbas Parish web
 # The three servers: Live, Staging, Development
 
 
--  The *Live Server* is the public-facing web server. We "rent" ours from [SimplyHosting](https://www.simplyhosting.com).  
+-  The *Live Server* is the public-facing web server. We "rent" ours from [SimplyHosting](https://www.simplyhosting.com). We use automation to *provison* the bare server with all the open source  server software we require to run our website. 
 
 -  The *Staging Server* is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
@@ -109,6 +109,8 @@ Instructions in the `staging` directory will tell you how to provision a staging
 During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this security alert whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` (i.e. omitting `https`) otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
 
 As soon as you're happy that the Staging Server is behaving properly, with respect to the Live Server, then switch the DNS `A` records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the `A` record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
+
+Don't forget to `vagrant halt` the virtual Staging Server. A side-effect of `vagrant halt` is the removal of `staging.bradford-abbas.uk` from the host Mac's `/et/hosts` which otherwise would take preference over the global DNS.
 
 ### Using the  Live Server
 
