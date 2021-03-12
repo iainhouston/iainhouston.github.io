@@ -26,6 +26,7 @@ github_username:  iainhouston
 # Build settings
 markdown: kramdown
 theme: minima
+
 plugins:
   - jekyll-feed
 
@@ -35,7 +36,7 @@ header_pages:
 
 disqus:
     shortname: iain-houstons-web-log
-    
+
 google_analytics: UA-35041732-1
 
 
