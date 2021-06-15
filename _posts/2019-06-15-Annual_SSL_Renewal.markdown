@@ -12,6 +12,12 @@ A Certificate Signing Request (CSR) is generated with:
 
     openssl req -in bradford-abbas.uk.csr -noout -text
 
+-   Country Code must be `GB` (and not `UK` for Ukraine)  
+
+- Challenge password must be blank
+
+- Common Nmae for us `bradford-abbas.uk` as it corresponds to the Apache ServerName definition where `www.bradford-abbas.uk:80` gets permanently redirected to `bradford-abbas.uk:443`
+
 I moved the resulting `.csr` file to the `certs` directory  
 
     sudo mv bradford-abbas.uk.csr /etc/ssl/certs  
@@ -24,4 +30,4 @@ and gave user and group read-only permissions to the key.
 
 ###Send CSR to SSL provider
 
-They should deal with Geotrust to obtain a certificate and / or authorisation request email-outs.
+They should deal with Geotrust to obtain a certificate and / or authorisation request email-outs. Sent to them via a support ticket.
