@@ -102,7 +102,7 @@ I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` 
 
 As I said above, the Staging Server is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
-#### nRent a new server from a hosting company and provision it   
+#### Rent a new server from a hosting company and provision it   
  
 Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a *virtual* Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the host Mac's (development machine's) DNS mapping for `staging.bradford-abbas.uk`.
 
