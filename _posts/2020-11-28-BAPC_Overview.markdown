@@ -102,13 +102,14 @@ I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` 
 
 As I said above, the Staging Server is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
-Rent a new server from a hosting company and provision it. Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a virtual Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the DNS mapping for `staging.bradford-abbas.uk`.
+####Rent a new server from a hosting company and provision it####   
+Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a *virtual* Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the host Mac's (development machine's) DNS mapping for `staging.bradford-abbas.uk`.
 
 Instructions in the `staging` directory will tell you how to provision a staging server. Note that the hostname and server name in our Ansible Staging provisioning setup will be that of the Live Server, only the DNS (or `/etc/hosts`) will direct `staging.badford-abbas` to the newly-provisioned soon-to-be-Live server.  
 
 During provisioning, the Apache directives are set up to serve both `staging.bradford-abbas.uk` and `bradford-abbas.uk` but the SSL Certificate is only set up for `bradford-abbas.uk` so your browser will complain when accessing `https://staging.bradford-abbas.uk`, but you'll ignore this security alert whilst checking out the Staging Server. Don't use `http://staging.bradford-abbas.uk` (i.e. omitting `https`) otherwise you'll get redirected to the the live server at `https://bradford-abbas.uk`
 
-As soon as you're happy that the Staging Server is behaving properly, with respect to the Live Server, then switch the DNS `A` records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the `A` record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
+As soon as you're happy that the Staging Server is behaving properly with respect to the Live Server, then switch the DNS `A` records for `www.bradford-abbas.uk` and `bradford-abbas.uk` to the IP Address of the Staing Server (and best remove the `A` record for `staging.bradford-abbas.uk`). Do this using the Domain Registrar (LCN) website.
 
 Don't forget to `vagrant halt` the virtual Staging Server. A side-effect of `vagrant halt` is the removal of `staging.bradford-abbas.uk` from the host Mac's `/et/hosts` which otherwise would take preference over the global DNS.
 
@@ -130,4 +131,4 @@ There's a third thing that is done automatically by the Live Server every week:
 
 [Developing and maintaining a Drupal site with Drupal-VM](/drupalbapc) describes the main files in the [GitHub repo iainhouston/bradford-abbas.uk](https://github.com/iainhouston/bradford-abbas.uk)
 
-*That* page is much more detailed than this post and is currently in need of updates to those details. This post is more likely to remain current.
+*That* page is much more detailed than this post and is currently in need of updates to those details. *This*  post is more likely to remain current.
