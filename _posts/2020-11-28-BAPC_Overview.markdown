@@ -103,6 +103,7 @@ I have tried various combinations of `XDEBUG` clients but have found `PHPStorm` 
 As I said above, the Staging Server is really only used when we have to change servers. Once we can see that we have migrated the code, database, static files and settings from the Live server correctly, the Staging Server becomes the Live Server.
 
 ####Rent a new server from a hosting company and provision it####   
+ 
 Just edit the DNS settings at our account at the domain registrar [LCN](https://www.lcn.com) to point `staging.bradford-abbas.uk` to the IP Address of the newly provisioned Staging Server. You may find it useful to  provision a *virtual* Staging Server first to practice the provisioning process. When using a virtual Staging Server, `vagrant` will populate `/etc/hosts` on the development Mac thus overriding the host Mac's (development machine's) DNS mapping for `staging.bradford-abbas.uk`.
 
 Instructions in the `staging` directory will tell you how to provision a staging server. Note that the hostname and server name in our Ansible Staging provisioning setup will be that of the Live Server, only the DNS (or `/etc/hosts`) will direct `staging.badford-abbas` to the newly-provisioned soon-to-be-Live server.  
