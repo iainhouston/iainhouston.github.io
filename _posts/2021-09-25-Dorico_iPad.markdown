@@ -17,6 +17,13 @@ The proof reading and condensing phase is now underway, mostly on the desktop.
 
 *TL;DR:* quite brilliant.
 
+## Dorico for iPad and Dorico for MacOS - in combination, 
+together they most certainly have stood up to the demands of my project, and exceeded them.
+The main point of the exercise was to learn about this piece of music and I was worried I’d be side-tracked by all sorts of software limitations - as I have done in the past -  but, quite to the contrary, *Dorico*, and *NotePerformer*, (with a little help from MacOS's built-n *Preview*!) far from getting in the way have really enhanced my learning experience: being able to isolate sections of the piece, play and replay different parts has been wonderful.
+
+# Note input. 
+Each note was input using the `QWERTY` keyboard. Left hand on `ABCDEFG`, right hand on the keystrokes for note length, accidentals and accents.
+
 ## Performance and reliability
 
 Both Dorico 3.5 (Desktop) and Dorico for iPad have been remarkably stable. There have been a few crashes but with no loss of work to speak of, so auto save on both platforms works when needed. On such a big project (the project file is greater than 3MB) there are noticeable periods of unresponsiveness on the iPad when auto saving, but since the program has kept all my work intact over six weeks of working on a single file, I put that down as a plus. (Yes, I have made manual and Time Machine backups continuously, but unnecessarily as it turned out).
@@ -40,13 +47,9 @@ There are one or two features missing, and probably one or two existing features
 
 ## Missing (or missed) features
 
-These are feature request for both platforms which I have raised in separate posts.
+I made a couple of feature request for both platforms which I have raised in separate posts.
 
-## Dorico for iPad and Dorico for MacOS - in combination, 
-together they most certainly have stood up to the demands of my project, and exceeded them.
-The main point of the exercise was to learn about this piece of music and I was worried I’d be side-tracked by all sorts of software limitations but, quite to the contrary, Dorico, and NotePerformer, (with a little help from Preview!) far from getting in the way have really enhanced my learning experience: being able to isolate sections of the piece, play and replay different parts has been wonderful.
-
-## Dorico for iPad UI comments
+## Dorico for iPad UI (User Interface) comments
 There are a couple of things worth mentioning:
 
 # The Apple Pencil. 
