@@ -13,6 +13,8 @@ The majority of note input was done on Dorico for iPad.
 
 The proof reading and condensing phase is now underway, mostly on the desktop.
 
+(See work in progress [in this post]({% post_url 2021-10-02-Tapiola_transcription %}))
+
 ## Overall impression
 
 *TL;DR:* quite brilliant.
