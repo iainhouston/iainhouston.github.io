@@ -17,8 +17,8 @@ The proof reading and condensing phase is now underway, mostly on the desktop.
 
 *TL;DR:* quite brilliant.
 
-## Dorico for iPad and Dorico for MacOS - in combination, 
-together they most certainly have stood up to the demands of my project, and exceeded them.
+## Dorico for iPad and Dorico for MacOS - in combination 
+Together they most certainly have stood up to the demands of my project, and exceeded them.
 The main point of the exercise was to learn about this piece of music and I was worried I’d be side-tracked by all sorts of software limitations - as I have done in the past -  but, quite to the contrary, *Dorico*, and *NotePerformer*, (with a little help from MacOS's built-n *Preview*!) far from getting in the way have really enhanced my learning experience: being able to isolate sections of the piece, play and replay different parts has been wonderful.
 
 # Note input. 
