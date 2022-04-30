@@ -1,6 +1,6 @@
 ---
 title: Debugging Drupal with Xdebug and Atom
-date: 2022-05-01 11-32-27
+date: 2022-04-30 
 layout: post
 comments: false
 categories: ['DevOps', 'Drupal']
