@@ -22,13 +22,15 @@ Atom does the job for me.
 
 PHPStorm is very useful and as I have blogged previously, has been a reliable and useful Xdebug client. Because of the architecture and history of Drupal and the fact that up-to-date documentation for this fantastic Open Source project, although greatly improved over the last 12 years, can often be hit and miss, the only way to really understand how to program contrib modules and themes is to explore key data structures and execution paths with an IDE (like PHPStorm for example).  
 
-PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warrented. It has every conceivable IDE bell and whistle out of the box.
+PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warrented. It has every conceivable IDE bell and whistle out of the box.  
+
+    And PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp and so I think that the learning curve of understanding PHPStorm's execution model and its integrated value-added layers and IDE facilities is more demanding than that of setting up Xdebug from scratch yourself unless, of course you can justify it in terms of the scale of the project in which you and your team are engaged.
 
 Developed by GitHub and contributors, free of charge and a delight to use is Atom, an editor with additional plug in packages that together give me all the sufficient but effective functionaity I need of an IDE. 
 
 # Objectives 
 
-But in the past I have found Atom difficult to set up as an Xdebug client so I thought that now I have a working setup, I would record what I did in to put together a development setup with the following items notable in the component stack (April 2022)  
+But in the past I have not found Atom that easy to set up as an Xdebug client so I thought that now I have a working system, I would record what I did in to put together a development setup with the following items notable in the component stack (April 2022)  
 
 *   Drupal 9.3.12  
 
@@ -42,7 +44,16 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
 
 *   Parallels Desktop providing the virtualisation for the virtual Ubuntu Linux guest dev machine
 
-# Atom setup
+
+So we want to have:
+
+1.  a connection between Xdebug running on the remote testing virtual server and 
+
+1.  the Xdebug client running on our host machine as an Atom plugin. 
+
+1.  We also want a browser set up with the ability to effectively switch Xdebug step tracing on and off for each http request it makes to the remote server.
+
+## Atom setup. 
 
 1.  I assume that you have the latest [Atom](https://atom.io) installed.
 
@@ -58,10 +69,12 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
         ```  
         
      1. Port    
-        The default Xdebug 3 is 9003 but I set mine to 9000 on the remote and left PHP-Debug's default 9000 on the client.  
+        The default Xdebug 3 is 9003 but I set mine to 9000 on the remote and left Atom's PHP-Debug default 9000 on the client.  
      
      1. IDE Key. 
         In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.  
+        
+## Remote testing server setup
        
 1.  Install Xdebug on the remote / guest VM  
     I used `sudo apt install php8.1-xdebug`
@@ -84,7 +97,17 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
     php_xdebug_log: "/tmp/xdebug.log"
     ```    
 
-    More to follow (May 1st)      
+1.  Restart the remote system's web server.  
+    AFAIK it is sufficient on my system to `sudo systemctl restart php8.1-fpm` but you may find it necessary to `sudo systemctl restart apache2`
+    
+## Browser setup  
+
+I use Firefox Developer Edition but I know that similar plugins / extension exist for Chrome.  
+
+1.  Install [Xdebug Helper for Firefox by BrianGilbert](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/)  
+
+1.  Edit the extension's settings to use the IDE Key `xdebug-atom`
+
         
 
 **more to follow**
