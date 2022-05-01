@@ -24,7 +24,7 @@ So I am motivated to get the free of charge tools I already have installed to do
 
 Atom does the job for me.
 
-PHPStorm is very useful and as I have blogged previously, has been a reliable and useful Xdebug client. Because of the architecture and history of Drupal and the fact that up-to-date documentation for this fantastic Open Source project, although greatly improved over the last 12 years, can often be hit and miss, the only way to really understand how to program contrib modules and themes is to explore key data structures and execution paths with an IDE (like PHPStorm for example).  
+PHPStorm is very useful and as I have blogged previously, has been a reliable and useful Xdebug client. Because of the architecture and history of Drupal and the fact that up-to-date documentation for this fantastic Open Source project, although greatly improved over the last 12 years, can often be hit and miss or just very low level, so often the only way to really understand how to program contrib modules and themes is to explore key data structures and execution paths with an IDE (like PHPStorm for example).  
 
 PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warrented. It has every conceivable IDE bell and whistle out of the box.  
 
@@ -98,7 +98,7 @@ So we want to have:
     xdebug.trigger_value=xdebug-atom
     xdebug.discover_client_host=true
     xdebug.client_port=9000
-    xdebug.log="/tmp/xdebug.log"
+    xdebug.log=/tmp/xdebug.log
     ```    
 
 1.  Restart the remote system's web server.  
@@ -114,8 +114,11 @@ I use Firefox Developer Edition but I know that similar plugins / extension exis
 
 If you mainly want to set breakpoints and inspect variables then I think the concepts of `IDE Key` and `trigger` are somewhat merged in Xdebug 3, so I leave the profile triggers and trace triggers blank.
 
-## Set up breakpoints
+## Set up breakpoints  
 
-        
+*"Move the cursor to a line you want to break on and set a breakpoint by pressing `Alt+F9`. 
+If everything worked correctly, you can now use the various buttons/commands to step through the script."*
 
-**more to follow**
+The Atom client's *PHP Console* indicates when the server is connected. The *Debug* panel lists the breakpoints you have set and allows you to inspect the values of all variables at such breakpoints.
+
+**Caveat:** I need to check the <span style="text-decoration: underline;">exact</span> configuration values when I get back from holiday but I think they are pretty much correct although you'd be well advised to check the [Xdebug docs](https://xdebug.org/docs/) in the meantime. (May 1st 2022)
