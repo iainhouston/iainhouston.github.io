@@ -2,7 +2,7 @@
 title: Debugging Drupal with Xdebug and Atom
 date: 2022-04-30 
 layout: post
-comments: false
+comments: true
 categories: ['DevOps', 'Drupal']
 ---
 
@@ -28,7 +28,7 @@ PHPStorm is very useful and as I have blogged previously, has been a reliable an
 
 PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warrented. It has every conceivable IDE bell and whistle out of the box.  
 
-    And PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp and so I think that the learning curve of understanding PHPStorm's execution model and its integrated value-added layers and IDE facilities is more demanding than that of setting up Xdebug from scratch yourself unless, of course you can justify it in terms of the scale of the project in which you and your team are engaged.
+And PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp and so I think that the learning curve of understanding PHPStorm's execution model and its integrated value-added layers and IDE facilities is more demanding than that of setting up Xdebug from scratch yourself unless, of course you can justify it in terms of the scale of the project in which you and your team are engaged.
 
 Developed by GitHub and contributors, free of charge and a delight to use is Atom, an editor with additional plug in packages that together give me all the sufficient but effective functionaity I need of an IDE. 
 
@@ -62,7 +62,7 @@ So we want to have:
 1.  I assume that you have the latest [Atom](https://atom.io) installed.
 
 1.  Install Atom's PHP-Debug package.  
-    You will be asked to install several other dependent packages. I ended up disabling the optional packages like PHP-IDE which caused errors as it seemed to be out of sync with PHP-Debug and didn't offer me I considered worthy of spending time on investigating the error.  
+    You will be asked to install several other dependent packages. I ended up disabling the optional packages like PHP-IDE which caused errors as it seemed to be out of sync with PHP-Debug and didn't offer me I considered worthy of spending time on investigating the error.  (There *is* one dependent package that is required.)
     Note that [PHP-Debug's GitHub page](https://github.atom.io/packages/php-debug) has example `php.ini` settings for Xdebug 2. Ignore these. We'll be using Xdebug 3 because it is compatible with PHP 8.1 (more on this below)
     
 1.  Configure PHP-Debug settings.  
