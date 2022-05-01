@@ -8,7 +8,11 @@ categories: ['DevOps', 'Drupal']
 
 # Summary. 
 
-[Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.
+[Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.  
+
+This is admitedly *opinionated* in the sense that it intentionally focuses on my particular simple uses case and in light of most web articles still relating to Xdebug 2 and older versions of PHP.  
+
+I hope it is useful to you and others with similar needs.
 
 # Motivation 
 
@@ -92,9 +96,9 @@ So we want to have:
     xdebug.mode=debug
     xdebug.start_with_request=trigger
     xdebug.trigger_value=xdebug-atom
-    php_xdebug_discover_client_host: true
-    php_xdebug_client_port: 9000
-    php_xdebug_log: "/tmp/xdebug.log"
+    xdebug.discover_client_host=true
+    xdebug.client_port=9000
+    xdebug.log="/tmp/xdebug.log"
     ```    
 
 1.  Restart the remote system's web server.  
@@ -107,6 +111,10 @@ I use Firefox Developer Edition but I know that similar plugins / extension exis
 1.  Install [Xdebug Helper for Firefox by BrianGilbert](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/)  
 
 1.  Edit the extension's settings to use the IDE Key `xdebug-atom`
+
+If you mainly want to set breakpoints and inspect variables then I think the concepts of `IDE Key` and `trigger` are somewhat merged in Xdebug 3, so I leave the profile triggers and trace triggers blank.
+
+## Set up breakpoints
 
         
 
