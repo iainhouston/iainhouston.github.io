@@ -61,14 +61,15 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
         a={{ a variable}}
         ```  
         
-1.  Next item  
-
+    1.  Next item  
+    
         Some text  
         
-        ```jinja  
-        a={{ a variable}}
-        ```  
-      
+        ```jinja2  
+        a={{ a variable }}  
+        ```    
+
+        some more text      
         
 
 **more to follow**
