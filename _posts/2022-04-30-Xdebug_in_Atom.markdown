@@ -69,21 +69,21 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
     
 ***Hmmm jinja { and } are disappearing inGitHub Markdown extension!***
         
-    ```Jinja  
-    ; target file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
-    
-    [XDebug]
-    zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
-
-    xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
-
-    xdebug.mode={{ php_xdebug_mode }}
-    xdebug.start_with_request={{ php_start_with_request }}
-    xdebug.trigger_value={{ php_xdebug_trigger_value }}
-    xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
-    xdebug.client_port={{ php_xdebug_client_port }}
-    xdebug.log={{ php_xdebug_log }}
-    ```    
+        ```jinja  
+        ; target file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
+        
+        [XDebug]
+        zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
+        
+        xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
+        
+        xdebug.mode={{ php_xdebug_mode }}
+        xdebug.start_with_request={{ php_start_with_request }}
+        xdebug.trigger_value={{ php_xdebug_trigger_value }}
+        xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
+        xdebug.client_port={{ php_xdebug_client_port }}
+        xdebug.log={{ php_xdebug_log }}
+        ```    
 
     More to follow (May 1st)      
         
