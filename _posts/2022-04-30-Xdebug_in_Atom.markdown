@@ -63,9 +63,12 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
         
 1.  Next item  
 
-
+        Some text  
+        
         ```jinja  
         a={{ a variable}}
         ```  
+      
+        
 
 **more to follow**
