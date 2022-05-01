@@ -57,19 +57,31 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
         [{"remote":"/var/www/drupal/web","local":"/Users/iainhouston/bradford-abbas.uk/web"}]
         ```  
         
-    1.  Port    
-    
+     1. Port    
         The default Xdebug 3 is 9003 but I set mine to 9000 on the remote and left PHP-Debug's default 9000 on the client.  
      
-     1.  IDE Key. 
-  
+     1. IDE Key. 
         In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.   
+       
+1.  Configure `php.ini` on remote.  
+
+    This is the template I have in my Ansible task. I will expand it below
         
-        ```jinja2  
-        a={{ a variable }}  
+        ```jinja  
+        [XDebug]
+        zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
+
+        xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
+
+        xdebug.mode={{ php_xdebug_mode }}
+        xdebug.start_with_request={{ php_start_with_request }}
+        xdebug.trigger_value={{ php_xdebug_trigger_value }}
+        xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
+        xdebug.client_port={{ php_xdebug_client_port }}
+        xdebug.log={{ php_xdebug_log }}
         ```    
 
-        some more text      
+        More to follow (May 1st)      
         
 
 **more to follow**
