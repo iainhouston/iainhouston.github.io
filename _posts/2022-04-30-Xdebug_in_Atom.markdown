@@ -6,17 +6,17 @@ comments: false
 categories: ['DevOps', 'Drupal']
 ---
 
-## Summary. 
+# Summary. 
 
 [Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.
 
-## Motivation 
+# Motivation 
 
 I try to avoid programming Drupal custom modules and themes but occasionally it is necessary to dust off the development tools, try to remember what I was doing a year ago when I last had to do this. At which point I find out that my JetBrains subscription to PHPStorm IDE has expired and needs £65 to renew it for a year.  
 
 So I am motivated to get the free of charge tools I already have installed to do the IDE tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client
 
-# PHPStorm and Atom  
+## PHPStorm and Atom  
 
 Atom does the job for me.
 
@@ -26,7 +26,7 @@ PHPStorm is a proprietary product which developers find invaluable and worth pay
 
 Developed by GitHub and contributors, free of charge and a delight to use is Atom, an editor with additional plug in packages that together give me all the sufficient but effective functionaity I need of an IDE. 
 
-## Objectives 
+# Objectives 
 
 But in the past I have found Atom difficult to set up as an Xdebug client so I thought that now I have a working setup, I would record what I did in to put together a development setup with the following items notable in the component stack (April 2022)  
 
@@ -42,7 +42,7 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
 
 *   Parallels Desktop providing the virtualisation for the virtual Ubuntu Linux guest dev machine
 
-## Atom setup
+# Atom setup
 
 1.  I assume that you have the latest [Atom](https://atom.io) installed.
 
@@ -51,19 +51,19 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
     Note that [PHP-Debug's GitHub page](https://github.atom.io/packages/php-debug) has example `php.ini` settings for Xdebug 2. Ignore these. We'll be using Xdebug 3 because it is compatible with PHP 8.1 (more on this below)
     
 1.  Configure PHP-Debug settings.  
-    1.  Path mappings. Drupal programs are in subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/iainhouston/bradford-abbas.uk/web` and so the Atom PHP-Debug path mapping is a JSON expression  
+    1.  Path mappings. Drupal programs are in subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/iainhouston/bradford-abbas.uk/web` and so the Atom PHP-Debug path mapping is a JSON dictionary expression  
     
         ```json
-        {{"remote":"/var/www/drupal/web","local":"/Users/iainhouston/bradford-abbas.uk/web"}]
+        [{"remote":"/var/www/drupal/web","local":"/Users/iainhouston/bradford-abbas.uk/web"}]
         ```  
         
-        ```jinja2  
-        a={{ a variable}}
-        ```  
-        
-    1.  Next item  
+    1.  Port    
     
-        Some text  
+        The default Xdebug 3 is 9003 but I set mine to 9000 on the remote and left PHP-Debug's default 9000 on the client.  
+     
+     1.  IDE Key. 
+  
+        In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.   
         
         ```jinja2  
         a={{ a variable }}  
