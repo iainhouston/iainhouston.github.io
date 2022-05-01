@@ -67,8 +67,8 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
 
     This is the template I have in my Ansible task. Note the how the `zend_extension file name` is constructed. I will show my actual expansion below
         
-    ```ini  
-    ; file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
+    ```jinja  
+    ; target file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
     
     [XDebug]
     zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
