@@ -69,7 +69,7 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
     
 ***Hmmm jinja { and } are disappearing inGitHub Markdown extension!***
         
-    ```jinja2  
+    ```Jinja  
     ; target file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
     
     [XDebug]
