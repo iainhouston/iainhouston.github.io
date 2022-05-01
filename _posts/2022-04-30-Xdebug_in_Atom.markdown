@@ -61,29 +61,28 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
         The default Xdebug 3 is 9003 but I set mine to 9000 on the remote and left PHP-Debug's default 9000 on the client.  
      
      1. IDE Key. 
-        In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.   
+        In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.  
        
-1.  Configure `php.ini` on remote.  
+1.  Install Xdebug on the remote / guest VM  
+    I used `sudo apt install php8.1-xdebug`
+       
+1.  Configure `php.ini` on remote. 
+    `apt install` will have created `/etc/php/8.1/fpm/conf.d/20-xdebug.ini` containing only `zend_extension=xdebug`
 
-    This is the template I have in my Ansible task. Note the how the `zend_extension file name` is constructed. I will show my actual expansion below
-    
-***Hmmm jinja { and } are disappearing inGitHub Markdown extension!***
+    For full explanation look at Xdebug's [Upgrade Guide](https://xdebug.org/docs/upgrade_guide) for Xdebug 2 -> 3 and [Xdebug docs](https://xdebug.org/docs/) for even more info.
         
-```django
-; target file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
-
-[XDebug]
-zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
-
-xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
-
-xdebug.mode={{ php_xdebug_mode }}
-xdebug.start_with_request={{ php_start_with_request }}
-xdebug.trigger_value={{ php_xdebug_trigger_value }}
-xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
-xdebug.client_port={{ php_xdebug_client_port }}
-xdebug.log={{ php_xdebug_log }}
-```    
+    ```ini
+    ; file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
+    
+    [XDebug]
+    zend_extension=xdebug.so
+    xdebug.mode=debug
+    xdebug.start_with_request=trigger
+    xdebug.trigger_value=xdebug-atom
+    php_xdebug_discover_client_host: true
+    php_xdebug_client_port: 9000
+    php_xdebug_log: "/tmp/xdebug.log"
+    ```    
 
     More to follow (May 1st)      
         
