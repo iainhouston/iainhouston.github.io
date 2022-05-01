@@ -1,8 +1,7 @@
 ---
 title: Debugging Drupal with Xdebug and Atom
-date: 2022-04-30 
 layout: post
-comments: true
+permalink: /atom_xdebug_client/
 categories: ['DevOps', 'Drupal']
 ---
 
@@ -12,7 +11,7 @@ categories: ['DevOps', 'Drupal']
 
 This is admitedly *opinionated* in the sense that it intentionally focuses on my particular simple uses case and in light of most web articles still relating to Xdebug 2 and older versions of PHP.  
 
-I hope it is useful to you and others with similar needs.
+I hope it is useful to you and others with similar needs to mine.
 
 # Motivation 
 
