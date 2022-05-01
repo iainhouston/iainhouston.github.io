@@ -51,7 +51,7 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
     Note that [PHP-Debug's GitHub page](https://github.atom.io/packages/php-debug) has example `php.ini` settings for Xdebug 2. Ignore these. We'll be using Xdebug 3 because it is compatible with PHP 8.1 (more on this below)
     
 1.  Configure PHP-Debug settings.  
-    1.  Path mappings. Drupal programs are in subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/iainhouston/bradford-abbas.uk/web` and so the Atom PHP-Debug path mapping is a JSON dictionary expression  
+    1.  Path mappings. Drupal programs are in subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/iainhouston/bradford-abbas.uk/web` and so the Atom PHP-Debug path mapping is a JSON dictionary expression like mine:
     
         ```json
         [{"remote":"/var/www/drupal/web","local":"/Users/iainhouston/bradford-abbas.uk/web"}]
@@ -65,23 +65,25 @@ But in the past I have found Atom difficult to set up as an Xdebug client so I t
        
 1.  Configure `php.ini` on remote.  
 
-    This is the template I have in my Ansible task. I will expand it below
+    This is the template I have in my Ansible task. Note the how the `zend_extension file name` is constructed. I will show my actual expansion below
         
-        ```jinja  
-        [XDebug]
-        zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
+    ```ini  
+    ; file /etc/php/8.1/fpm/conf.d/20-xdebug.ini
+    
+    [XDebug]
+    zend_extension="{{ php_xdebug_module_path }}/xdebug-{{ php_xdebug_version }}.so"
 
-        xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
+    xdebug.max_nesting_level={{ php_xdebug_max_nesting_level }}
 
-        xdebug.mode={{ php_xdebug_mode }}
-        xdebug.start_with_request={{ php_start_with_request }}
-        xdebug.trigger_value={{ php_xdebug_trigger_value }}
-        xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
-        xdebug.client_port={{ php_xdebug_client_port }}
-        xdebug.log={{ php_xdebug_log }}
-        ```    
+    xdebug.mode={{ php_xdebug_mode }}
+    xdebug.start_with_request={{ php_start_with_request }}
+    xdebug.trigger_value={{ php_xdebug_trigger_value }}
+    xdebug.discover_client_host={{ php_xdebug_discover_client_host }}
+    xdebug.client_port={{ php_xdebug_client_port }}
+    xdebug.log={{ php_xdebug_log }}
+    ```    
 
-        More to follow (May 1st)      
+    More to follow (May 1st)      
         
 
 **more to follow**
