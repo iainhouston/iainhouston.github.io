@@ -24,7 +24,7 @@ twitter_username: Trismegister
 github_username:  iainhouston
 
 # Build settings
-markdown: kramdown
+# markdown: kramdown
 theme: minima
 
 plugins:
