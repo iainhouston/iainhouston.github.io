@@ -70,7 +70,7 @@ parameters:
     debug: true 
 ```
 
-Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering node being formatted.  They will appear in this manner (To be updated with real output)
+Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  The suggested template names will appear in this manner (To be updated with real output) with an "x" against the one actually chosen. The "BEGIN OUTPUT" line will show whether the template was chosen from your own theme or one of its base themes for example
 
 ```
 <!-- THEME DEBUG -->
@@ -92,12 +92,58 @@ Then, in outgoing emails, we will see the names of the TWIG templates that Drupa
 </article>
 
 <!-- END OUTPUT from 'core/themes/classy/templates/content/node.html.twig' -->
+``` 
+
+What we will notice is that Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
+
+*   `node--article--email-html.html.twig` which is for a `article` content type node being displayed in its `email-html` view
+
+At this point it will be necessary to rename the preprocess functions (if any) in our theme file. In our case we have our own contrib theme `pellucid_olivero` containing the following code correspondimg to the above template file:  
+
+```php
+function pellucid_olivero_preprocess_node__article__email_html(&$variables) {
+  // https://api.drupal.org/api/drupal/core%21modules%21views%21views.module/function/views_embed_view/8.5.x
+  $relatedArticles = views_embed_view('frontpage_news_items', 'block_2');
+  $variables['related_articles'] = \Drupal::service('renderer'->render($relatedArticles);
+}
 ```
 
-And why it was necessary (and possible) to deploy [PHP 8.1's Xdebug 3 with Atom](https://iainhouston.com/atom_xdebug_client/).  
+And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you like me, are without  PHPStorm or a PHPStorm configured for Xdebugging,  to a previous post where I describe how to deploy [PHP 8.1's Xdebug 3 with Atom](https://iainhouston.com/atom_xdebug_client/).  
 
 Changes to templates  
 --------------------
 
-And the purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
+For example, we have `email.html.twig` which takes the place of `swiftmail.html.twig` which we use to wrap the _body_ of our simplenews messages in a 600px wide table.  
+(Please leave a comment if you have better ideas and know whether Microsoft email clients still need html tables to define a lowest common denominator of email client formatting, but we based this  I think from a helpful Mailchimp blog post):  
+
+```html+jinja
+<!DOCTYPE html>
+<html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <!--[if mso]>
+  <xml>
+    <o:OfficeDocumentSettings>
+      <o:PixelsPerInch>96</o:PixelsPerInch>
+    </o:OfficeDocumentSettings>
+  </xml>
+  <![endif]-->
+</head>
+<body>
+<!--[if mso]>
+<table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto; width:600px;"><tr><td>
+<![endif]-->
+<div class="body-wrapper">
+  {{ body }}
+</div>
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+</body>
+</html>
+```
+
+**to come**
+
+The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
 
