@@ -31,7 +31,7 @@ Well, that *was* our approach, but switching to Symfony Mailer whilst retaining 
 
 `mailhog` was working as mail sent from the Linux `mail` command  correctly invoked `mhsendmail` and messages are routed to the mailhog UI for inspection.
 
-It is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its installation process. We could verify that we had imported our swiftmailer configuration OK as, since mailhog uses port 1025, we can send our simplenews email messages to mailhog by using Symfony Mailer’s SMTP Transport specifying host 127.0.0.1 and port 1025.
+It is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process. We could verify that we had imported our swiftmailer configuration OK as, since mailhog uses port 1025, we can send our simplenews email messages to mailhog by using Symfony Mailer’s SMTP Transport specifying host 127.0.0.1 and port 1025.
 
 But we could not meet our objective of having both dev and live Symfony Mail configuration use Native Transport. This is the approach we abandoned as it would seem that, in the nature of the `sendmail`-style interaction between the two processes (mailhog and symfony), each  has different expectations from the other.
 
@@ -39,4 +39,12 @@ But we could not meet our objective of having both dev and live Symfony Mail con
 
 We *do* have a workable solution that allows us to trap emails in mailhog in dev and actually send messages via the `sendmail` transport on the live system both using Drupal Symfony Mailer and with the same config settings in both.
 
-How we do it is this: the default Transport in the GUI is permanently set to `sendmail`. Thus `sendmail` gets picked up in the Live system but it gets  overriden by `smtp` in the dev system because we do a config override `$config['symfony_mailer.settings']['default_transport'] = 'smtp';`  in our dev's `settings.php`, thus sending SMTP to 127.0.0.1:1025 which is mailhog’s port. 
+How we do it is this: the **default** Transport in the GUI is permanently set to `sendmail` but we also have a (non-default) SMTP Transport configuration set to Host 127.0.0.1 and Port 1025 (mailhog's port).  
+
+So the `sendmail` configuration gets picked up in the Live system however  it gets  overriden by `smtp` in the dev system because we do a config override in our dev's `settings.php` thus:
+
+```php
+$config['symfony_mailer.settings']['default_transport'] = 'smtp';
+```  
+
+**fin**

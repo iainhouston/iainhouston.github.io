@@ -5,7 +5,7 @@ permalink: /atom_xdebug_client/
 categories: ['DevOps', 'Drupal']
 ---
 
-### Summary. 
+# Summary. 
 
 [Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.  
 
@@ -13,13 +13,13 @@ This is admitedly *opinionated* in the sense that it intentionally focuses on my
 
 I hope it is useful to you and others with similar needs to mine.
 
-### Motivation 
+# Motivation 
 
 I try to avoid programming Drupal custom modules and themes if I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing a year ago when I last had to do this. At which point I find out that my JetBrains subscription to PHPStorm IDE has expired and needs £65 to renew it for a year.  
 
 So I am motivated to get the free of charge tools I already have installed to do the IDE tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client
 
-## PHPStorm and Atom  
+# PHPStorm and Atom  
 
 Atom does the job for me.
 
@@ -31,11 +31,11 @@ But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific 
 
 Developed by GitHub and contributors, free of charge and a delight to use is Atom, a really first class editor with additional plug in packages that together give me   sufficient and effective functionaity that I need of an IDE. 
 
-### Objectives 
+# Objectives 
 
 Providing that Xdebug on the dev server is set up with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that now I have a working system, I would record what is needed put to together a development setup with these following items of note in my component stack (May 2022)  
 
-# Server-side
+## Server-side
 
 *   Drupal 9.3.12  
 
@@ -45,7 +45,7 @@ Providing that Xdebug on the dev server is set up with the correct `php.ini` con
 
 *   Xdebug 3 which has different, simpler `php.ini` settings than previously in Xdebug 2
 
-# Client-side
+## Client-side
 
 *   Ansible, Vagrant, and my fork of Jeff Geerling's Drupal-VM which I use to provision both the Live server and the virtual Dev machine.  
 
@@ -62,7 +62,7 @@ So we want to have:
 
 1.  We also want a browser set up with the ability to effectively switch Xdebug step tracing on and off for each http request it makes to the remote server.
 
-## Atom setup. 
+# Atom setup. 
 
 1.  I assume that you have the latest [Atom](https://atom.io) installed.
 
@@ -83,7 +83,7 @@ So we want to have:
      1. IDE Key. 
         In Xdebug 3 this is just another *trigger*. In any case I set PHP-Debug's IDE key as `xdebug-atom` and will specify this as the trigger on the remote VM.  
         
-## Remote testing server setup
+# Remote testing server setup
        
 1.  Install Xdebug on the remote / guest VM  
     I used `sudo apt install php8.1-xdebug`
@@ -115,7 +115,7 @@ So we want to have:
     AFAIK it is sufficient to `sudo systemctl restart php8.1-fpm` but for good measure `sudo systemctl restart apache2` also.  
     Maybe someone would be kind enough to comment below as to whether restarting Apache is really necessary when using PHP-fpm. I don't think that it is.
     
-## Browser setup  
+# Browser setup  
 
 I use Firefox Developer Edition but I know that similar [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/) extensions exist for Chrome and [for Safari](https://apps.apple.com/us/app/xdebug-key/id1441712067?mt=12).  
 
@@ -125,7 +125,7 @@ I use Firefox Developer Edition but I know that similar [Xdebug Helper](https://
 
 If you mainly want to set breakpoints and inspect variables then I think the concepts of `IDE Key` and `trigger` are somewhat merged in Xdebug 3, so I leave the profile triggers and trace triggers blank.
 
-## Set up breakpoints  
+# Set up breakpoints  
 
 *"Move the cursor to a line you want to break on and set a breakpoint by pressing `Alt+F9`. 
 If everything worked correctly, you can now use the various buttons/commands to step through the script."*
