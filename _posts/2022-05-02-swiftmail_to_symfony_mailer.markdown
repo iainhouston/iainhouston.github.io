@@ -134,9 +134,7 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto; width:600px;"><tr><td>
 <![endif]-->
 <div class="body-wrapper">
-  {% raw %}
-  {{ body }}
-  {% endraw %}
+{% raw %}{{ body }}{% endraw %}
 </div>
 <!--[if mso]>
 </td></tr></table>
@@ -145,7 +143,7 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 </html>
 ```
 
-I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute with more general advice. In this post I am being very specific to the particular way we are using Simplenews and Drupal's Symfony Mailer.
+I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute with more general advice drawn from the very particular way we are using Simplenews and Drupal's Symfony Mailer.
 
 **to come**
 
