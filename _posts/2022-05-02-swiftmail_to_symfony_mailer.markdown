@@ -116,7 +116,7 @@ Changes to templates
 For example, we have `email.html.twig` which takes the place of `swiftmail.html.twig` which we use to wrap the _body_ of our simplenews messages in a 600px wide table.  
 (Please leave a comment if you have better ideas and know whether Microsoft email clients still need html tables to define a lowest common denominator of email client formatting, but we based this  I think from a helpful Mailchimp blog post):  
 
-```html+jinja
+```html
 <!DOCTYPE html>
 <html lang="en" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
