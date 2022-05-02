@@ -25,8 +25,8 @@ We were keen to switch our Simplenews and site emails from Mail System and Swift
 
 We use mailhog (and thus `mhsendmail`) to capture emails on our dev system running in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has mailhog provisioning built in.
 
-History - and how we abandoned our approach
--------------------------------------------
+History - and how we abandoned our previous approach
+----------------------------------------------------
 
 On our dev system,  when provisioned, configured `php.ini` >> `sendmail_path=/opt/mailhog/mhsendmail` and on our our live system `sendmail_path` specified the default sendmail binary. In this way we could maintain an identical Drupal configuration between dev and live systems thus eliminating potential errors by minimising any configuration differences.
 
@@ -72,7 +72,7 @@ parameters:
 
 Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  The suggested template names will appear in this manner (To be updated with real output) with an "x" against the one actually chosen. The "BEGIN OUTPUT" line will show whether the template was chosen from your own theme or one of its base themes for example
 
-```
+```html
 <!-- THEME DEBUG -->
 <!-- THEME HOOK: 'node' -->
 <!-- FILE NAME SUGGESTIONS:
@@ -108,7 +108,7 @@ function pellucid_olivero_preprocess_node__article__email_html(&$variables) {
 }
 ```
 
-And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you like me, are without  PHPStorm or a PHPStorm configured for Xdebugging,  to a previous post where I describe how to deploy [PHP 8.1's Xdebug 3 with Atom](https://iainhouston.com/atom_xdebug_client/).  
+And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you who, like me, are without  PHPStorm or a PHPStorm properly configured for Xdebug,  to a previous post where I describe how to deploy [PHP 8.1's Xdebug 3 with the excellent Atom editor](https://iainhouston.com/atom_xdebug_client/).  
 
 Changes to templates  
 --------------------
@@ -142,6 +142,8 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 </body>
 </html>
 ```
+
+I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute with more general advice. In this post I am being very specific to the particular way we are using Simplenews and Drupal's Symfony Mailer.
 
 **to come**
 
