@@ -134,7 +134,9 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 <table role="presentation" border="0" cellpadding="0" cellspacing="0" style="margin:0 auto; width:600px;"><tr><td>
 <![endif]-->
 <div class="body-wrapper">
+  {% raw %}
   {{ body }}
+  {% endraw %}
 </div>
 <!--[if mso]>
 </td></tr></table>
