@@ -47,4 +47,15 @@ So the `sendmail` configuration gets picked up in the Live system however  it ge
 $config['symfony_mailer.settings']['default_transport'] = 'smtp';
 ```  
 
-**fin**
+# Theming 
+
+To be added shortly.  
+
+## Changes to preprocessing function names  
+
+And why it was necessary (and possible) to deploy [PHP 8.1's Xdebug 3 with Atom](https://iainhouston.com/atom_xdebug_client/).  
+
+## Changes to templates  
+
+And the purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
+
