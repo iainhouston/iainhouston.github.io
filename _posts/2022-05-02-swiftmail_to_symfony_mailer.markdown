@@ -5,45 +5,56 @@ permalink: /swift_to_symfony/
 categories: ['DevOps', 'Drupal']
 ---
 
-Drupal's Swiftmailer module is no longer supported as our site's Status Report keeps on reminding us and also that we must switch to Drupal's Symfony Mailer. So what to do?
+Drupal's Swiftmailer module is no longer supported as our site's Status Report keeps on reminding us and also tells us that we must switch to Drupal's Symfony Mailer. So what to do?
 
 Summary  
 =======
 
-We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new Symfony Mailer on our Live and Dev servers whilst finding a simple solution to retaining our use use of `mailhog` on our dev system. 
+We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new [Symfony Mailer](https://www.drupal.org/project/symfony_mailer) (`symfony_mailer`) on both Live and Dev servers whilst finding a simple solution to retaining our  use of Mailhog on our dev system. 
 
 Why is this important to us?  
-============================
+===========================_
 
-Our system  deploys several `simplenews` "issues" (distribution lists) in our role of supporting the functioning of our community. 
+We don't use any third party mailing system like Mailchimp (although maybe we will at some point) but send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
 
-We send a low volume of emails but each one is important to us as many of our content types fulfil a statuary requirement.   
+To do this we use Mailhog (and thus `mhsendmail`) to capture emails on our dev system. The Dev system runs in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has [Mailhog provisioning built in](https://github.com/geerlingguy/ansible-role-mailhog).  
 
-We don't use any third party mailing system like Mailchimp (although maybe we should at some point) but, for the time being, testing the functionality and appearance of our simplenews issues is important to us.
+`mhsendmail` is set in `php.ini` as `sendmail_path`.
+In any case, were we to use the default `sendmail` binary, attempts to send email into the ether would not be successful as they would be eminating from the private subnet IP adddress of the Dev virtual machine.
 
-We were keen to switch our Simplenews and site emails from Mail System and Swiftmailer to Symfony Mailer with as little disruption as possible.
+Our system  deploys several `simplenews` "issues" (distribution lists), key to the functioning of our community website. We send a low volume of emails but each one is important to us as several of our content types fulfil a statutary requirement.   
 
-We use mailhog (and thus `mhsendmail`) to capture emails on our dev system running in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has mailhog provisioning built in.
+We were keen to switch our Simplenews and site emails from Mail System and Swiftmailer to Symfony Mailer so long as we coould do so with  as few differences between Live and Dev configuration as possible.
 
 History - and how we abandoned our previous approach
 ----------------------------------------------------
 
-On our dev system,  when provisioned, configured `php.ini` >> `sendmail_path=/opt/mailhog/mhsendmail` and on our our live system `sendmail_path` specified the default sendmail binary. In this way we could maintain an identical Drupal configuration between dev and live systems thus eliminating potential errors by minimising any configuration differences.
+Our dev system is provisioned with `php.ini` configured 
 
-Well, that *was* our approach, but switching to Symfony Mailer whilst retaining our current php.ini settings and choosing SM’s Native Transport produced no errors yet neither did it produce any email output! We tried various combinations of -t -bs -i (mh)sendmail parameters with varying degrees of failure.
+```ini
+sendmail_path=/opt/mailhog/mhsendmail
+``` 
 
-`mailhog` was working as mail sent from the Linux `mail` command  correctly invoked `mhsendmail` and messages are routed to the mailhog UI for inspection.
+and on our our live system the `sendmail_path` is left as the default sendmail binary. In this way we could maintain an identical Drupal configuration between dev and live systems thus eliminating potential errors by minimising any configuration differences. Since Symfony Mailer's *Native* Transport would use whatever was configured in the PHP `sendmail_path` this seemed the way to go.
 
-It is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process. We could verify that we had imported our swiftmailer configuration OK as, since mailhog uses port 1025, we can send our simplenews email messages to mailhog by using Symfony Mailer’s SMTP Transport specifying host 127.0.0.1 and port 1025.
+Well, that *was* our approach, but Symfony Mailer produced no errors yet neither did it produce any email output! We tried various combinations of -t -bs -i (mh)sendmail parameters with varying degrees of failure. (Turns out that mhsendmail ignores all these flags anyway).
 
-But we could not meet our objective of having both dev and live Symfony Mail configuration use Native Transport. This is the approach we abandoned as it would seem that, in the nature of the `sendmail`-style interaction between the two processes (mailhog and symfony), each  has different expectations from the other.
+I should note that to have got this far with tryimg Symfony Mailer you will have had to go through the [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process. More on this later when we talk about Symfony Mailer *Policies*.
+
+BTW you can check that `mailhog` is working at any time as mail sent from the Linux `mail` command  should correctly invoke `mhsendmail` and messages are routed to the Mailhog Web UI for inspection. e.g.
+
+```bash
+$ mail -s"Test Subject" -aFrom:webmaster@bmy.provisioned.website.uk anyemail@me.com <<< "Test Body"
+``` 
+
+So, in the end, we could not meet our objective of having both dev and live Symfony Mail configuration use *Native* Transport. This is the approach we abandoned as it would seem that, in the nature of the `sendmail`-style interaction between the two processes (Mailhog and Symfony), each  has different expectations of the other.
 
 Our solution
 ============
 
-We *do* have a workable solution that allows us to trap emails in mailhog in dev and actually send messages via the `sendmail` transport on the live system both using Drupal Symfony Mailer and with the same config settings in both.
+We *do* have a workable solution that allows us to trap emails in Mailhog in dev and actually send messages via the `sendmail` transport on the live system both using Drupal Symfony Mailer and with the same config settings in both.
 
-How we do it is this: the **default** Transport in the GUI is permanently set to `sendmail` but we also have a (non-default) SMTP Transport configuration set to Host 127.0.0.1 and Port 1025 (mailhog's port).  
+How we do it is this: the *default* Transport in the GUI is permanently set to `sendmail` but we also have a (non-default) SMTP Transport configuration set to Host 127.0.0.1 and Port 1025 (mailhog's port).  
 
 So the `sendmail` configuration gets picked up in the Live system however  it gets  overriden by `smtp` in the dev system because we do a config override in our dev's `settings.php` thus:
 
@@ -145,7 +156,10 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 
 I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute with more general advice drawn from the very particular way we are using Simplenews and Drupal's Symfony Mailer.
 
-**to come**
+Drupal Symfony Mailer Policy markup
+-----------------------------------
 
 The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
+
+It is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process. We could verify that we had imported our swiftmailer configuration OK as, since mailhog uses port 1025, we can send our simplenews email messages to mailhog by using Symfony Mailer’s SMTP Transport specifying host 127.0.0.1 and port 1025.
 
