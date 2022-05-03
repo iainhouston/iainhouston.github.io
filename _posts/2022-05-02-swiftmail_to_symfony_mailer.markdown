@@ -13,9 +13,11 @@ Summary
 We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new [Symfony Mailer](https://www.drupal.org/project/symfony_mailer) (`symfony_mailer`) on both Live and Dev servers whilst finding a simple solution to retaining our  use of Mailhog on our dev system. 
 
 Why is this important to us?  
-===========================_
+============================
 
-We don't use any third party mailing system like Mailchimp (although maybe we will at some point) but send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
+In addition to Drupal's reasons for switching from Swiftmailer to Symfony Mailer there are good reasons of our own to switch. Looking at the [Symfony Mailer docs](https://symfony.com/doc/current/mailer.html) you can see that Symfony is looking at the broader picture by integrating into its services, some of the things like DKIM signing, that we have to manage in detail ourselves. If not already included in Drupal's implementation, it seems reasonable to expect inclusion in due course.
+
+On our sie we don't use any third party mailing system like Mailchimp (although maybe we will at some point) but we send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
 
 To do this we use Mailhog (and thus `mhsendmail`) to capture emails on our dev system. The Dev system runs in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has [Mailhog provisioning built in](https://github.com/geerlingguy/ansible-role-mailhog).  
 
@@ -81,7 +83,9 @@ parameters:
     debug: true 
 ```
 
-Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  The suggested template names will appear in this manner (To be updated with real output) with an "x" against the one actually chosen. The "BEGIN OUTPUT" line will show whether the template was chosen from your own theme or one of its base themes for example
+Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  The suggested template names will appear in this manner  with an "x" against the one actually chosen. The "BEGIN OUTPUT" line will show whether the template was chosen from your own theme or one of its base themes for example:  
+
+***(To be updated with our actual theme debugging output)***
 
 ```html
 <!-- THEME DEBUG -->
@@ -107,7 +111,7 @@ Then, in outgoing emails, we will see the names of the TWIG templates that Drupa
 
 What we will notice is that Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
 
-*   `node--article--email-html.html.twig` which is for a `article` content type node being displayed in its `email-html` view
+`node--article--email-html.html.twig` which is for a `article` content type node being displayed in its `email-html` view
 
 At this point it will be necessary to rename the preprocess functions (if any) in our theme file. In our case we have our own contrib theme `pellucid_olivero` containing the following code correspondimg to the above template file:  
 
@@ -119,7 +123,7 @@ function pellucid_olivero_preprocess_node__article__email_html(&$variables) {
 }
 ```
 
-And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you who, like me, are without  PHPStorm or a PHPStorm properly configured for Xdebug,  to a previous post where I describe how to deploy [PHP 8.1's Xdebug 3 with the excellent Atom editor](https://iainhouston.com/atom_xdebug_client/).  
+And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you who, like me are without  PHPStorm by choice or necessity, to a previous post where I describe how to simply deploy [PHP 8.1's Xdebug 3](https://iainhouston.com/atom_xdebug_client/)  with my editor of choice, Atom (April 2022).  
 
 Changes to templates  
 --------------------
@@ -154,12 +158,53 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 </html>
 ```
 
-I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute with more general advice drawn from the very particular way we are using Simplenews and Drupal's Symfony Mailer.
+I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute in a more general way with info that I have  drawn from the very particular way we have deployed Simplenews and Drupal's Symfony Mailer and our particular Dev "toolchain".
 
 Drupal Symfony Mailer Policy markup
 -----------------------------------
 
 The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
 
-It is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process. We could verify that we had imported our swiftmailer configuration OK as, since mailhog uses port 1025, we can send our simplenews email messages to mailhog by using Symfony Mailer’s SMTP Transport specifying host 127.0.0.1 and port 1025.
+As I mentioned before, it is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process.
+
+I haven't completely got my head around the thinking behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instruction. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* cofigurations for each of those components as they crop up in Simplenews configuration YAML. In the example below see what Symfony Mailer has picked up from Simplenews during import:  
+
+```yaml
+# file symfony_mailer.mailer_policy.simplenews_newsletter.node.councillors.yml
+uuid: 9b952dfc-...
+langcode: en
+status: true
+dependencies:
+  config:
+    - simplenews.newsletter.councillors
+id: simplenews_newsletter.node.councillors
+configuration:
+  email_from:
+    addresses:
+      -                                                                                                                                                                   
+        value: clerk@bmy.website.uk
+        display: 'Our Parish Clerk'
+```
+
+```yaml
+# file simplenews.newsletter.councillors.yml
+uuid: 581c5a46...
+langcode: en
+status: true
+dependencies: {  }                                                                                                                                                        
+name: Councillors
+id: councillors
+description: 'This list of  email addresses are "subscribed" by the Parish Clerk and is used to summons councillors to meetings; circulate documents, etc.'
+format: html
+priority: 0
+receipt: true
+from_name: 'Our Parish Clerk'
+subject: '[[simplenews-newsletter:name]] [node:title]'
+from_address: clerk@my.website.uk
+hyperlinks: true
+allowed_handlers: {  }                                                                                                                                                    
+new_account: 'off'
+access: default
+weight: 0
+```
 
