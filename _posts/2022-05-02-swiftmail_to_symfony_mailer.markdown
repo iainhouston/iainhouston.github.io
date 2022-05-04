@@ -167,7 +167,7 @@ The purpose and functionality of Symfony Mailer's *Policy* markup and how they s
 
 As I mentioned before, it is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process.
 
-I haven't completely got my head around the thinking and practie behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instruction. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* cofigurations for each of those components as they crop up in Simplenews configuration YAML. In the example below see what Symfony Mailer has picked up from Simplenews during import:  
+I haven't completely got my head around the thinking and practie behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instruction and import configuration data. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* cofigurations for each of those components as they crop up in Simplenews configuration YAML. In the example below see what Symfony Mailer has picked up from Simplenews during import:  
 
 ```yaml
 # file symfony_mailer.mailer_policy.simplenews_newsletter.node.councillors.yml
@@ -209,6 +209,8 @@ new_account: 'off'
 access: default
 weight: 0
 ```
+And Drupal's Symfony Mailer GUI allows you to edit what you have imported.
 
-And an `article` node
+![Editing Simplenews Policy](/assets/images/SimplenewsPolicy.png)
+
 
