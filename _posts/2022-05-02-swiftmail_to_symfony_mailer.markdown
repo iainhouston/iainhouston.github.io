@@ -122,7 +122,7 @@ Then, in the source markup of outgoing emails, we will see the names of the TWIG
 <!-- END OUTPUT from 'themes/contrib/our_theme/templates/node—article—email-html.html.twig' -->
 ``` 
 
-Inspecting the above DEBUG information, there are several things to note here:  
+Inspecting the above *DEBUG* information, there are several things to note here:  
 
 1.  Symfony Mailer has its own template naming conventions, so we need to rename the templates that we previously used with Swiftmail (more below).
 1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
@@ -137,11 +137,11 @@ Renaming theme templates
  
 Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
 
-`node--article--email-html.html.twig` which is for an `article` content type node being displayed in its `email-html` view.
+`node--article--email-html.html.twig` which is for our *Article* content type node being displayed in its `email-html` view.
 
 And now we will probably need Xdebug to see exactly what data we are being passed in `$variables` so at this point I will refer those of you who, like me are without  PHPStorm by choice or necessity, to a previous post where I describe how to simply deploy [PHP 8.1's Xdebug 3](https://iainhouston.com/atom_xdebug_client/)  with my editor of choice, Atom (April 2022).  
 
-Also we have `email.html.twig` which takes the place of `swiftmail.html.twig` which is used to wrap the _body_ of our simplenews messages. (I think we based the following on a helpful Mailchimp blog post):  
+Then we have `email.html.twig` which takes the place of `swiftmail.html.twig` which is used to wrap the _body_ of our simplenews messages. (I think we based the following Microsoft client-friendly HTML on a helpful Mailchimp blog post):  
 
 ```html
 <!DOCTYPE html>
@@ -170,7 +170,7 @@ Also we have `email.html.twig` which takes the place of `swiftmail.html.twig` wh
 </html>
 ```
 
-I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which I intend to contribute in a more general way whilst drawing from our particular deployment of Simplenews and Drupal's Symfony Mailer and our particular Dev "toolchain".
+I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) for more info on theme file naming
 
 Drupal Symfony Mailer Policy markup
 -----------------------------------
@@ -212,7 +212,7 @@ name: Councillors
 id: councillors
 description: 'This list of  email addresses are "subscribed" by the Parish Clerk and is used to summons councillors to meetings; circulate documents, etc.'
 format: html
-priority: 0
+priority: <0></0>
 receipt: true
 from_name: 'Our Parish Clerk'
 subject: '[[simplenews-newsletter:name]] [node:title]'
