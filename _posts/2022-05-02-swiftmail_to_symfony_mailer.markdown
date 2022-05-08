@@ -127,21 +127,21 @@ Inspecting the above DEBUG information, there are several things to note here:
 
 1.  Symfony Mailer has its own template naming conventions, so you will need to rename the templates that we previously used with Swiftmail (more below).
 1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
-1. The suggested template names will appear in the above manner  with an “x” against the one actually chosen. 
-1. The “BEGIN OUTPUT” line will show whether the template was chosen from your own theme or one of its base themes.
-1. CSS from your theme’s `email.css` is injected inline as  email clients generally only handle in line styling and have no means of including external CSS files.
+1. The suggested template names will appear following the *FILE NAME SUGGESTIONS* line with an _x_ against the one actually chosen. 
+1. The *BEGIN OUTPUT* line will show whether the template was chosen from your own theme or one of its base themes.
+1. CSS from your theme’s `email.css` is injected inline to the html as  email clients generally only handle in line styling and have no means of including external CSS files.
 1. [Symfony Mailer’s installation docs](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) describe how `<your theme's>.libraries.yml` is configured to point to `email.css`
 
 
 Renaming theme templates
-———————————————————————-  
+------------------------  
  
 Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
 
 `node--article--email-html.html.twig` which is for an `article` content type node being displayed in its `email-html` view.
 
 Renaming theme functions
-———————————————————————-  
+------------------------  
 At this point it will be necessary to rename the preprocess functions (if any) in your theme file. Supposing we have our own contrib theme `my_theme` containing the following code correspondimg to the above template file:  
 
 ```php
@@ -194,9 +194,9 @@ Drupal Symfony Mailer Policy markup
 
 **TBD** *The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?*
 
-As I mentioned before, it is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process.
+As I mentioned before, it is necessary to import previously-used `simplenews` and `swiftmail` config settings into Symfony Mailer as a step in its [installation process](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation).
 
-I haven't completely got my head around the thinking and practice behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instructions and import configuration data. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* markup configurations for each of those components as they crop up in our existing Simplenews configuration YAML.  
+I haven't completely got my head around the thinking and practice behind everything the  Drupal module `symfony_mailer` does with its *Policies* but I can see that they get created when you follow the installation instructions and import   existing configuration data. And you can see that some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* markup configurations for each of those components as they crop up in our existing Simplenews configuration YAML.  
 
 In the example below see what Symfony Mailer has picked up from Simplenews during import:  
 
@@ -208,7 +208,7 @@ status: true
 dependencies:
   config:
     - simplenews.newsletter.councillors
-id: simplenews_newsletter.node.councillors
+id: simplenews_newsletter.node.councillor
 configuration:
   email_from:
     addresses:
