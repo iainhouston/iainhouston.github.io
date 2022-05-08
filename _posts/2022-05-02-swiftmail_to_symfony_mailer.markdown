@@ -12,6 +12,8 @@ Summary
 
 We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new [Symfony Mailer](https://www.drupal.org/project/symfony_mailer) (`symfony_mailer`) on both Live and Dev servers whilst finding a simple solution to retaining our  use of Mailhog on our dev system. 
 
+Although I've gone into a lot of detail below, making the switch really was quite straightforward, especially if you've done any Drupal theming before.
+
 Why is this important to us?  
 ============================
 
@@ -48,7 +50,7 @@ So, in the end, we could not meet our objective of having both dev and live Symf
 BTW you can check that `mailhog` is working at any time as mail sent from the Linux `mail` command  should correctly invoke `mhsendmail` and messages then routed to the Mailhog Web UI for inspection. e.g.
 
 ```bash
-$ mail -s"Test Subject" -aFrom:webmaster@bmy.provisioned.website.uk anyemail@me.com <<< "Test Body"
+$ mail -s"Test Subject" -aFrom:webmaster@my.website.uk anyemail@me.com <<< "Test Body"
 ``` 
 
 Our solution
@@ -83,40 +85,67 @@ parameters:
     debug: true 
 ```
 
-Then, in outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  The suggested template names will appear in this manner  with an "x" against the one actually chosen. The "BEGIN OUTPUT" line will show whether the template was chosen from your own theme or one of its base themes for example:  
+Then, in the source markup of outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  
 
-***(To be updated with our actual theme debugging output)***
 
 ```html
-<!-- THEME DEBUG -->
-<!-- THEME HOOK: 'node' -->
-<!-- FILE NAME SUGGESTIONS:
-   * node--view--frontpage--page-1.html.twig
-   * node--view--frontpage.html.twig
-   * node--1--teaser.html.twig
-   * node--1.html.twig
-   * node--article--teaser.html.twig
-   * node--article.html.twig
-   * node--teaser.html.twig
-   x node.html.twig
--->
-<!-- BEGIN OUTPUT from 'core/themes/classy/templates/content/node.html.twig' -->
+<!— THEME DEBUG —>
+<!— THEME HOOK: ‘node’ —>
+<!— FILE NAME SUGGESTIONS:
+   * node—501–email-html.html.twig
+   * node—501.html.twig
+   x node—article—email-html.html.twig
+   * node—article.html.twig
+   * node—email-html.html.twig
+   * node.html.twig 
+   —>
+<!— BEGIN OUTPUT from ‘themes/contrib/my_theme/templates/node—article—email-html.html.twig’ —>
 
-<article data-history-node-id="1" data-quickedit-entity-id="node/1" role="article" class="contextual-region node node--type-article node--promoted node--view-mode-teaser" about="/node/1" typeof="schema:Article" data-quickedit-entity-instance-id="0">
-....
-</article>
+<div class=“mailpix”>
+  <img class=“mailpix_img” 
+    src=“http://my.website.uk/themes/contrib/my_theme/images/email_hero.jpg” 
+    alt=“My Web Site banner hero image” 
+    style=“max-width: 100%; border: 0; height: auto; outline: none;” >
+</div>
 
-<!-- END OUTPUT from 'core/themes/classy/templates/content/node.html.twig' -->
+<p class=“link-to-page” 
+    style=“font-family: serif; font-size:18px; line-height: 26px; text-align: center; width: 100%; margin: 0;”>
+
+<a href=“http://my.website.uk/node/501” 
+    style=“text-decoration: none; font-family: Arial,sans-serif; font-size: 12px; line-height: 16px; color: #0d77b5;”>
+    You can view this message in your web browser
+</a>
+</p>
+.
+.
+.
+
+<!-- END OUTPUT from 'themes/contrib/my_theme/templates/node—article—email-html.html.twig' -->
 ``` 
 
-What we will notice is that Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
+Inspecting the above DEBUG information, there are several things to note here:  
 
-`node--article--email-html.html.twig` which is for a `article` content type node being displayed in its `email-html` view
+1.  Symfony Mailer has its own template naming conventions, so you will need to rename the templates that we previously used with Swiftmail (more below).
+1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
+1. The suggested template names will appear in the above manner  with an “x” against the one actually chosen. 
+1. The “BEGIN OUTPUT” line will show whether the template was chosen from your own theme or one of its base themes.
+1. CSS from your theme’s `email.css` is injected inline as  email clients generally only handle in line styling and have no means of including external CSS files.
+1. [Symfony Mailer’s installation docs](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) describe how `<your theme's>.libraries.yml` is configured to point to `email.css`
 
-At this point it will be necessary to rename the preprocess functions (if any) in our theme file. In our case we have our own contrib theme `pellucid_olivero` containing the following code correspondimg to the above template file:  
+
+Renaming theme templates
+———————————————————————-  
+ 
+Symfony Mailer has its own template naming conventions, so we will need to rename the templates that we used with Swiftmail. For example, after switching to Symfony Mailer our site has templates named like this:  
+
+`node--article--email-html.html.twig` which is for an `article` content type node being displayed in its `email-html` view.
+
+Renaming theme functions
+———————————————————————-  
+At this point it will be necessary to rename the preprocess functions (if any) in your theme file. Supposing we have our own contrib theme `my_theme` containing the following code correspondimg to the above template file:  
 
 ```php
-function pellucid_olivero_preprocess_node__article__email_html(&$variables) {
+function my_theme_preprocess_node__article__email_html(&$variables) {
   // https://api.drupal.org/api/drupal/core%21modules%21views%21views.module/function/views_embed_view/8.5.x
   $relatedArticles = views_embed_view('frontpage_news_items', 'block_2');
   $variables['related_articles'] = \Drupal::service('renderer'->render($relatedArticles);
@@ -128,8 +157,8 @@ And now we will probably need Xdebug to see exactly what data we are being passe
 Changes to templates  
 --------------------
 
-For example, we have `email.html.twig` which takes the place of `swiftmail.html.twig` which we use to wrap the _body_ of our simplenews messages in a 600px wide table.  
-(Please leave a comment if you have better ideas and know whether Microsoft email clients still need html tables to define a lowest common denominator of email client formatting, but we based this  I think from a helpful Mailchimp blog post):  
+To start with, for example, we have `email.html.twig` which takes the place of `swiftmail.html.twig` which we use to wrap the _body_ of our simplenews messages in a 600px wide table.  
+(Please leave a comment if you have better ideas for markup here and know whether Microsoft email clients still need html tables to define a lowest common denominator of email client formatting, but we based this  I think from a helpful Mailchimp blog post):  
 
 ```html
 <!DOCTYPE html>
@@ -158,16 +187,18 @@ For example, we have `email.html.twig` which takes the place of `swiftmail.html.
 </html>
 ```
 
-I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute in a more general way with info that I have  drawn from the very particular way we have deployed Simplenews and Drupal's Symfony Mailer and our particular Dev "toolchain".
+I would like to refer you to the [Drupal Symfony Mailer documentation pages](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) to which in due course I would like to contribute in a more general way with info that I have  drawn from our very particular deployment of Simplenews and Drupal's Symfony Mailer and our particular Dev "toolchain".
 
 Drupal Symfony Mailer Policy markup
 -----------------------------------
 
-The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?
+**TBD** *The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?*
 
 As I mentioned before, it is necessary to import previously-used `swiftmail` config settings into Symfony Mailer as a step in its [installation](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation) process.
 
-I haven't completely got my head around the thinking and practie behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instruction and import configuration data. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* cofigurations for each of those components as they crop up in Simplenews configuration YAML. In the example below see what Symfony Mailer has picked up from Simplenews during import:  
+I haven't completely got my head around the thinking and practice behind what the  Drupal module `symfony_mailer` intends with its *Policies* which get created when you follow the installation instructions and import configuration data. But some pretty clever analysis is going on. For example, since Symfony Mailer is concerned with all the component parts of a mail message (*Body, From, Subject* etc.) it creates *Policy* markup configurations for each of those components as they crop up in our existing Simplenews configuration YAML.  
+
+In the example below see what Symfony Mailer has picked up from Simplenews during import:  
 
 ```yaml
 # file symfony_mailer.mailer_policy.simplenews_newsletter.node.councillors.yml
