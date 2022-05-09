@@ -12,16 +12,16 @@ Summary
 
 We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new [Symfony Mailer](https://www.drupal.org/project/symfony_mailer) (`symfony_mailer`) on both Live and Dev servers whilst finding a simple solution to retaining our  use of Mailhog to capture outgoing email on our Dev system. 
 
-Although I've gone into a lot of detail below, making the switch really was quite straightforward, especially if you've done any Drupal theming before.
+Although I've gone into detail below, making the switch really was quite straightforward. Those who've done Drupal theming before shouldn't have any problems.
 
 Why is this important to us?  
 ============================
 
-In addition to Drupal's immediate reasons for encouragine sites to switch from Swiftmailer to Symfony Mailer there are seemingly other good reasons to switch. The [Symfony Mailer docs](https://symfony.com/doc/current/mailer.html) show that Symfony is looking at the broader picture by integrating into its services some of the things, like DKIM signing for example, whose integration our site maintainers have to manage in detail. 
+In addition to Drupal's immediate reasons for encouragine sites to switch from Swiftmailer to Symfony Mailer there are likely long-term benefits to be gained. The [Symfony Mailer docs](https://symfony.com/doc/current/mailer.html) show that Symfony is looking at the broader picture by integrating into its services some of the things, like DKIM signing for example, whose integration into our `postfix` instance whose detail our site maintainers have to manage. 
 
-[The current and future of Drupal's Symfony Mailer](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status) is wide ranging and addresses head-on several scenarios for integration of the Symfony facilities with Drupal. But here I am only addressing a narrower issue, specifically the scenario of using the Drupal *Legacy Mode* to get our use of Simplenews up and running with the new mailer.
+[The current and future of Drupal's Symfony Mailer](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status)  addresses  several scenarios for integration of the Symfony facilities into Drupal. But here I am only addressing the narrow issue of using  Drupal Symfony Mailer's *Legacy Mode* to get our use of Simplenews up and running with the new mailer.
 
-On our site we don't use any third party mailing service like Mailchimp. We send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
+We don't use any third party mailing service like Mailchimp. We send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
 
 To do this we use Mailhog (and thus `mhsendmail`) to capture emails on our Dev system. The Dev system runs in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has [Mailhog provisioning built in](https://github.com/geerlingguy/ansible-role-mailhog).  
 
@@ -63,11 +63,13 @@ We *do* have a workable solution that allows us to:
 
 *   maintain a consistent Drupal configuration across both Dev and Live systems
 
-*   trap emails in Mailhog in Dev and  send actual messages from the Live system
+*   trap emails in Mailhog in Dev and  
+
+*   transmit actual messages from the Live system 
 
 We do this
 
-*   via the *Sendmail* Transport on the live system and the *SMTP* Transport on the Dev system, both using the same config  Drupal Symfony Mailer settings
+*   via the *Sendmail* Transport on the live system and the *SMTP* Transport on the Dev system, both using the same   Drupal Symfony Mailer config settings
 
 *   the *default* Transport in the GUI is permanently set to `sendmail` but we also have a (non-default) SMTP Transport configuration set to Host 127.0.0.1 and Port 1025 (Mailhog's port).  
 
@@ -189,8 +191,6 @@ I would like to refer you to the [Drupal Symfony Mailer documentation pages](htt
 
 Drupal Symfony Mailer Policy markup
 -----------------------------------
-
-**TBD** *The purpose and functionality of Symfony Mailer's *Policy* markup and how they simplify templates?*
 
 As I mentioned before, it is necessary to import previously-used `simplenews` and `swiftmail` config settings into Symfony Mailer as a step in its [installation process](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation).
 
