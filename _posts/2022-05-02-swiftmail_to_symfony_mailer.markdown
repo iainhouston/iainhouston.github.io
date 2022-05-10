@@ -109,7 +109,6 @@ For example:
 ```html
 .
 .
-.
 <!-- THEME DEBUG -->
 <!-- THEME HOOK: ‘node’ -->
 <!-- FILE NAME SUGGESTIONS:
@@ -126,18 +125,17 @@ For example:
   <img class=“mailpix_img” 
     src=“http://my.website.uk/themes/contrib/our_theme/images/email_hero.jpg” 
     alt=“My Web Site banner hero image” 
-    style=“max-width: {% raw %}100%; border: 0; height: auto; outline: none;{% endraw %}” >
+    style=“max-width: 100%; border: 0; height: auto; outline: none;” >
 </div>
 
 <p class=“link-to-page” 
-    style=“font-family: {% raw %}serif; font-size:18px; line-height: 26px; text-align: center; width: 100%; margin: 0;{% endraw %}”>
+    style=“font-family: serif; font-size:18px; line-height: 26px; text-align: center; width: 100%; margin: 0;”>
 
 <a href=“http://my.website.uk/node/501” 
     style=“text-decoration: none; font-family: Arial,sans-serif; font-size: 12px; line-height: 16px; color: #0d77b5;”>
     You can view this message in our web browser
 </a>
 </p>
-.
 .
 .
 
