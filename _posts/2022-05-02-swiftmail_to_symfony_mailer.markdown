@@ -138,13 +138,12 @@ For example:
 </p>
 .
 .
-
 <!-- END OUTPUT from 'themes/contrib/our_theme/templates/node—article—email-html.html.twig' -->
 ``` 
 
 Inspecting the above *DEBUG* information, there are several things to note here:  
 
-1.  The above example is just one (the first) *THEME HOOK* of the many components' TWIG templates involved in rendering a `'node'`
+1.  The above example is just one (the first) *THEME HOOK* traced in an hierarchy of  the many components' TWIG templates involved in rendering a `'node'`
 1.  Symfony Mailer has its own template naming conventions, so we need to rename any templates that we previously used (more below).
 1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
 1. The suggested template names will appear following the *FILE NAME SUGGESTIONS* line with an _x_ against the one actually chosen. 
@@ -254,6 +253,6 @@ Drupal's Symfony Mailer alpha release doesn't yet have every facilty that every 
 Finally
 -------  
 
-If you have your own experience that would help improve this article, do please leave a comment below. Thanks.
+If your own experience would help improve this article, then do please leave a comment below. Thanks.
 
 
