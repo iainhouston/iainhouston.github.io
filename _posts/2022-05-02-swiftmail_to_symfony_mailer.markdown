@@ -12,16 +12,16 @@ Summary
 
 We switched from Drupal's `mailsystem` and `swiftmailer` combination to Drupal's new [Symfony Mailer](https://www.drupal.org/project/symfony_mailer) (`symfony_mailer`) on both Live and Dev servers whilst finding a simple solution to retaining our  use of Mailhog to capture outgoing email on our Dev system. 
 
-Although I've gone into detail below, making the switch really was quite straightforward. Those who've done Drupal theming before shouldn't have any problems.
+Although I've gone into some detail below, making the switch really was quite straightforward. Those who've done Drupal theming before shouldn't have any problems.
 
 Why is this important to us?  
 ============================
 
-In addition to Drupal's immediate reasons for encouragine sites to switch from Swiftmailer to Symfony Mailer there are likely long-term benefits to be gained. The [Symfony Mailer docs](https://symfony.com/doc/current/mailer.html) show that Symfony is looking at the broader picture by integrating into its services some of the things, like DKIM signing for example, whose integration into our `postfix` instance whose detail our site maintainers have to manage. 
+In addition to Drupal's immediate reasons for encouraging sites to switch from Swiftmailer to Symfony Mailer there are likely long-term benefits to be gained. The [Symfony Mailer docs](https://symfony.com/doc/current/mailer.html) show that Symfony is looking at the broader picture by having integrated into its services some of the things, like DKIM signing for example, that we have to integrate into our `postfix` instance ourselves. 
 
-[The current and future of Drupal's Symfony Mailer](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status)  addresses  several scenarios for integration of the Symfony facilities into Drupal. But here I am only addressing the narrow issue of using  Drupal Symfony Mailer's *Legacy Mode* to get our use of Simplenews up and running with the new mailer.
+Drupal's Symfony Mailer, [with its current set of features](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status)  addresses  several scenarios for integration of the Symfony facilities into Drupal. But here I am only addressing the narrow issue of using  Drupal Symfony Mailer's *Legacy Mode* to get our use of Simplenews up and running with the new mailer.
 
-We don't use any third party mailing service like Mailchimp. We send email directly from our server's `postfix` MTA. Testing the functionality and appearance of our simplenews issues is important to us. 
+We don't use any third party mailing service like Mailchimp. We send email directly from our server's `postfix` MTA. So testing the functionality and appearance of our simplenews issues is important to us. 
 
 To do this we use Mailhog (and thus `mhsendmail`) to capture emails on our Dev system. The Dev system runs in a Parallels virtual machine provisioned using our fork of [Jeff Geering's Drupal-VM](https://www.drupalvm.com) which has [Mailhog provisioning built in](https://github.com/geerlingguy/ansible-role-mailhog).  
 
@@ -44,7 +44,7 @@ Were we to use the default `sendmail` binary on our Dev system, attempts to send
 
 Since Symfony Mailer's *Native* Transport would use whatever was configured in the PHP `sendmail_path` this seemed the way to go.  
 
-So, that *was* our approach which we tried to maintain as we switched to Symfony Mailer at which point mailing produced no errors yet neither did it produce any email output! We tried various combinations of `mhsendmail` parameters ( ` -t -bs -i` ) with varying degrees of failure. Turns out that `mhsendmail` ignores all these flags anyway.
+So, that *was* our approach which we tried to maintain as we switched to Symfony Mailer at which point mailing produced no errors yet neither did it produce any email output! We tried various combinations of `mhsendmail` parameters ( -t -bs -i) with varying degrees of failure. Turns out that `mhsendmail` ignores all these flags anyway.
 
 I should note that to have got this far we had to have gone through the [extra Symfony Mailer installation tasks](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/getting-started#s-installation). More on this later when we talk about Symfony Mailer *Policies*.
 
@@ -73,7 +73,7 @@ We do this
 
 *   the *default* Transport in the GUI is permanently set to `sendmail` but we also have a (non-default) SMTP Transport configuration set to Host 127.0.0.1 and Port 1025 (Mailhog's port).  
 
-So the *Sendmail* configuration gets picked up in the Live system. However  it gets  overriden by *SMTP* in the Dev system because we do a config override in our dev's `settings.php` thus:
+So the *Sendmail* configuration gets picked up in the Live system. However  it gets  overriden by *SMTP* in the Dev system because we do a config override in Dev's `settings.php` thus:
 
 ```php
 $config['symfony_mailer.settings']['default_transport'] = 'smtp';
@@ -103,6 +103,8 @@ parameters:
 ```
 
 Then, in the source markup of outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  
+
+For example:
 
 ```html
 <!— THEME DEBUG —>
@@ -141,6 +143,7 @@ Then, in the source markup of outgoing emails, we will see the names of the TWIG
 
 Inspecting the above *DEBUG* information, there are several things to note here:  
 
+1.  The above example is just one (the first) *THEME HOOK* of the many components' TWIG templates involved in rendering a `'node'`
 1.  Symfony Mailer has its own template naming conventions, so we need to rename any templates that we previously used (more below).
 1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
 1. The suggested template names will appear following the *FILE NAME SUGGESTIONS* line with an _x_ against the one actually chosen. 
@@ -240,6 +243,16 @@ weight: 0
 ```
 And Drupal's Symfony Mailer GUI allows us to edit what we have imported.
 
-![Editing Simplenews Policy](/assets/images/SimplenewsPolicy.png)
+![Editing Simplenews Policy](/assets/images/SimplenewsPolicy.png)  
+
+Going Live
+----------  
+
+Drupal's Symfony Mailer alpha release doesn't yet have every facilty that every Simplenews user will need. (Have a look at the [Legacy TODO list](https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status)) but running Dev tests gave us confidence that we could go live with the alpha. Something others will also consider carefully.
+
+Finally
+-------  
+
+If you have your own experience that would help improve this article, do please leave a comment below. Thanks.
 
 
