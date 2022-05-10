@@ -104,7 +104,7 @@ parameters:
 
 Then, in the source markup of outgoing emails, we will see the names of the TWIG templates that Drupal is looking for when it is rendering a node.  
 
-For example:
+For example, this is what we see in the *Source* tab of the Mailhog web page after having sent a Simplenews Newsletter:
 
 ```html
 .
@@ -143,7 +143,7 @@ For example:
 
 Inspecting the above *DEBUG* information, there are several things to note here:  
 
-1.  The above example is just one (the first) *THEME HOOK* traced in an hierarchy of  the many components' TWIG templates involved in rendering a `'node'`
+1.  The above example is just one (the first) set of *THEME HOOK* HTML comments  in an hierarchy of  the many components' TWIG templates involved in rendering a `'node'` into an email message.
 1.  Symfony Mailer has its own template naming conventions, so we need to rename any templates that we previously used (more below).
 1.  Theme functions corresponding to theme template names will also need to be renamed. (more below).
 1. The suggested template names will appear following the *FILE NAME SUGGESTIONS* line with an _x_ against the one actually chosen. 
