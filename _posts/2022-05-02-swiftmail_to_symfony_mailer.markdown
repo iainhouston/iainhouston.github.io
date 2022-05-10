@@ -119,17 +119,18 @@ For example:
    * node—article.html.twig
    * node—email-html.html.twig
    * node.html.twig --> 
-<!—- BEGIN OUTPUT from ‘themes/contrib/our_theme/templates/node—article—email-html.html.twig’ -—>
+   
+<!-- BEGIN OUTPUT from ‘themes/contrib/our_theme/templates/node—article—email-html.html.twig’ -->
 
 <div class=“mailpix”>
   <img class=“mailpix_img” 
     src=“http://my.website.uk/themes/contrib/our_theme/images/email_hero.jpg” 
     alt=“My Web Site banner hero image” 
-    style=“max-width: 100%; border: 0; height: auto; outline: none;” >
+    style=“max-width: {% raw %}100%; border: 0; height: auto; outline: none;{% endraw %}” >
 </div>
 
 <p class=“link-to-page” 
-    style=“font-family: serif; font-size:18px; line-height: 26px; text-align: center; width: 100%; margin: 0;”>
+    style=“font-family: {% raw %}serif; font-size:18px; line-height: 26px; text-align: center; width: 100%; margin: 0;{% endraw %}”>
 
 <a href=“http://my.website.uk/node/501” 
     style=“text-decoration: none; font-family: Arial,sans-serif; font-size: 12px; line-height: 16px; color: #0d77b5;”>
