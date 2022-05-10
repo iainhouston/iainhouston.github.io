@@ -107,16 +107,18 @@ Then, in the source markup of outgoing emails, we will see the names of the TWIG
 For example:
 
 ```html
-<!—- THEME DEBUG -—>
-<!—- THEME HOOK: ‘node’ -—>
-<!—- FILE NAME SUGGESTIONS:
+.
+.
+.
+<!-- THEME DEBUG -->
+<!-- THEME HOOK: ‘node’ -->
+<!-- FILE NAME SUGGESTIONS:
    * node—501–email-html.html.twig
    * node—501.html.twig
    x node—article—email-html.html.twig
    * node—article.html.twig
    * node—email-html.html.twig
-   * node.html.twig 
-   -—>
+   * node.html.twig --> 
 <!—- BEGIN OUTPUT from ‘themes/contrib/our_theme/templates/node—article—email-html.html.twig’ -—>
 
 <div class=“mailpix”>
