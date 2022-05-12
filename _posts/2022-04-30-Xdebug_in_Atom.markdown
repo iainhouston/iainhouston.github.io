@@ -9,27 +9,20 @@ categories: ['DevOps', 'Drupal']
 
 [Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.  
 
-This is admitedly *opinionated* in the sense that it intentionally focuses on my particular simple uses case and in light of most web articles still relating to Xdebug 2 and older versions of PHP.  
+This is admitedly *opinionated* in the sense that it intentionally focuses on my particular simple uses case and in light of most web articles still relating to __Xdebug 2__ and older versions of PHP rather than the current versions.  
 
 I hope it is useful to you and others with similar needs to mine.
 
 # Motivation
 
-I try to avoid programming Drupal custom modules and themes if I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing a year ago when I last had to do this. At which point I find out that my JetBrains subscription to PHPStorm IDE has expired and needs £65 to renew it for a year.  
+I try to avoid programming Drupal custom modules and themes if I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing a year ago when I last had to do this. 
+So I am motivated to get the tools I already have to do the IDE tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
 
-So I am motivated to get the free of charge tools I already have installed to do the IDE tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client
+# Atom  
 
-# PHPStorm and Atom  
+Atom does the job for me. Developed by GitHub and contributors, it is free of charge and a delight to use. It is a really first class editor with additional plug in packages that together give me sufficient and effective IDE functionaity.  
 
-Atom does the job for me.
-
-PHPStorm is very useful and as I have blogged previously, has been a reliable and fully-featured Xdebug client. Because of the architecture and history of Drupal and the fact that up-to-date documentation for this fantastic Open Source project, although greatly improved over the last 12 years, can often be hit and miss or just very low level, then often the only way to really understand how to program contrib modules and themes is to explore key data structures and execution paths with an IDE (like PHPStorm for example).  
-
-So PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warranted. It has every conceivable IDE bell and whistle out of the box plus extensive and excellent help resources.  
-
-But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve for a passable understanding of PHPStorm's execution model and its integrated value-added and layers and mighty IDE facilities is actually more demanding than that of setting up Xdebug from scratch. Unless, of course you can justify this investment in time and money in relation to the scale of the project in which you and your team are engaged.
-
-Developed by GitHub and contributors, free of charge and a delight to use is Atom, a really first class editor with additional plug in packages that together give me   sufficient and effective functionaity that I need of an IDE.
+I have been a subcriber but don't need PHPStorm at this time (see below).
 
 # Objectives
 
@@ -43,7 +36,7 @@ Providing that Xdebug on the dev server is set up with the correct `php.ini` con
 
 *   PHP 8.1 - (PHP 8.0 and later require Xdebug 3)  
 
-*   Xdebug 3 which has different, simpler `php.ini` settings than previously in Xdebug 2
+*   ___Xdebug 3___ which has different, simpler `php.ini` settings than previously _in Xdebug 2_
 
 ## Client-side
 
@@ -117,7 +110,7 @@ So we want to have:
 
 # Browser setup  
 
-I use Firefox Developer Edition but I know that similar [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/) extensions exist for Chrome and [for Safari](https://apps.apple.com/us/app/xdebug-key/id1441712067?mt=12).  
+I use [Firefox Developer Edition](https://www.mozilla.org/en-GB/firefox/developer/) but I know that similar [Xdebug Helper](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/) extensions exist for Chrome and [for Safari](https://apps.apple.com/us/app/xdebug-key/id1441712067?mt=12).  
 
 1.  Install [Xdebug Helper for Firefox by BrianGilbert](https://addons.mozilla.org/en-US/firefox/addon/xdebug-helper-for-firefox/)  
 
@@ -131,3 +124,12 @@ If you mainly want to set breakpoints and inspect variables then I think the con
 If everything worked correctly, you can now use the various buttons/commands to step through the script."*
 
 The Atom client's *PHP Console* panel indicates when the server is connected. The *PHP Debug* panel lists the breakpoints you have set and allows you to inspect the values of variables at such breakpoints.
+
+# A note on PHPStorm  
+
+I no longer use PHPStorm. PHPStorm is very useful and as I have blogged previously, has been a reliable and fully-featured Xdebug client. 
+
+PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warranted. It has every conceivable IDE bell and whistle out of the box plus extensive and excellent help resources.  
+
+But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve for a passable understanding of PHPStorm's execution model and its integrated value-added and layers and mighty IDE facilities is actually more demanding than that of setting up Xdebug from scratch. Unless, of course you can justify this investment in time and money in relation to the scale of the project in which you and your team are engaged.
+
