@@ -5,8 +5,6 @@ permalink: /atom_xdebug_client/
 categories: ['DevOps', 'Drupal']
 ---  
 
-*[Last edited {{ site.time | date: '%B %d, %Y' }}]*
-
 # Summary
  
 Atom's docs and most web articles  still refer  to  __Xdebug 2__ configuration and older versions of PHP rather than the current versions of both.
