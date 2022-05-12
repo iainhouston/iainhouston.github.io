@@ -16,13 +16,11 @@ This is  *opinionated* advice drawn from my experience with my simple use case. 
 
 # Motivation
 
-We aim for *Low Code* site development, to do the minimum Drupal programming of custom modules and themes, but occasionally it is necessary for me to dust off the development tools and then try to remember what I was doing those months ago when I last had to.  
-
-So I need to ready the development tools I already have to do the "IDE" tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
+We aim for *Low Code* site development, to do the minimum Drupal programming of custom modules and themes, but occasionally it is necessary for me to dust off the development tools and then try to remember what I was doing those months ago when I last had to. "IDE" tasks I need to do are chiefly code editing  with some debugging and inspection using Atom as an Xdebug client.
 
 # Objectives
 
-Providing that Xdebug on the dev server is set up with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that I would record what is needed put to together a development setup with thes following items in my component stack.  
+Providing that Xdebug is set uo on the dev server  with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that I would record what is needed.  I have the following items in my component stack.  
 
 This my current set-up (May 2022)  
 
