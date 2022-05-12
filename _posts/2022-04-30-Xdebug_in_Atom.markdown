@@ -12,11 +12,11 @@ Atom's docs and most web articles  still refer  to  __Xdebug 2__ configuration a
 
 [Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with __Xdebug 3__ and  __PHP 8.1__) and sufficient for my Drupal dev needs. Here's how I set it up.
 
-This is an *opinionated* advice drawn from my experience with my simple use case. I hope it is useful to you and others with similar needs to mine.
+This is  *opinionated* advice drawn from my experience with my simple use case. I hope it is useful to you and others with similar needs to mine.
 
 # Motivation
 
-I aim to do the minimum Drupal programming of custom modules and themes that I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing those months ago when I last had to.  
+I aim to do the minimum Drupal programming of custom modules and themes that I can, but occasionally it is necessary to dust off the development tools and then try to remember what I was doing those months ago when I last had to.  
 
 So I need to get the tools I already have to do the "IDE" tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
 
@@ -64,7 +64,7 @@ Atom (developed by GitHub and contributors) is free of charge and a delight to u
     Note that [PHP-Debug's GitHub page](https://github.atom.io/packages/php-debug) has example `php.ini` settings for _Xdebug 2_. Ignore these. We'll be using _Xdebug 3_ because it is compatible with PHP 8.1 (more on this below)
 
 1.  Configure Atom's PHP-Debug settings.  
-    1.  Path mappings. Drupal programs are in subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/iainhouston/bradford-abbas.uk/web` and so the Atom PHP-Debug path mapping is a JSON dictionary expression like this:
+    1.  Path mappings. Drupal programs are in the `themes/contrib` and `modules/contrib` subfolders of `/var/www/drupal/web` of the guest-remote VM whereas I am editing them in the host-local subdirectories of `/Users/me/mysite/web` and so the Atom PHP-Debug path mapping is a JSON dictionary expression like this:
 
         ```json
         [{"remotePath":"/var/www/drupal/web","localPath":"/Users/me/mysite/web"}]
