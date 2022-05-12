@@ -3,48 +3,46 @@ title: Debugging Drupal with Xdebug and Atom
 layout: post
 permalink: /atom_xdebug_client/
 categories: ['DevOps', 'Drupal']
----
+---  
 
-# Summary.
+# Summary
+ 
+Atom's docs and most web articles  still refer  to  __Xdebug 2__ configuration and older versions of PHP rather than the current versions of both.
 
-[Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with Xdebug 3 + PHP 8.1) and sufficient for my Drupal dev needs. Here's how I set it up.  
 
-This is admitedly *opinionated* in the sense that it intentionally focuses on my particular simple uses case and in light of most web articles still relating to __Xdebug 2__ and older versions of PHP rather than the current versions.  
+[Atom](https://atom.io) is an excellent debugging client when connected to a remote Drupal (with __Xdebug 3__ and  __PHP 8.1__) and sufficient for my Drupal dev needs. Here's how I set it up.
 
-I hope it is useful to you and others with similar needs to mine.
+This is an *opinionated* advice drawn from my experience with my simple use case. I hope it is useful to you and others with similar needs to mine.
 
 # Motivation
 
-I try to avoid programming Drupal custom modules and themes if I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing a year ago when I last had to do this. 
-So I am motivated to get the tools I already have to do the IDE tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
+I aim to do the minimum Drupal programming of custom modules and themes that I can, but occasionally it is necessary to dust off the development tools, then try to remember what I was doing those months ago when I last had to.  
 
-# Atom  
-
-Atom does the job for me. Developed by GitHub and contributors, it is free of charge and a delight to use. It is a really first class editor with additional plug in packages that together give me sufficient and effective IDE functionaity.  
-
-I have been a subcriber but don't need PHPStorm at this time (see below).
+So I need to get the tools I already have to do the "IDE" tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
 
 # Objectives
 
-Providing that Xdebug on the dev server is set up with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that now I have a working system, I would record what is needed put to together a development setup with these following items of note in my component stack (May 2022)  
+Providing that Xdebug on the dev server is set up with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that I would record what is needed put to together a development setup with thes following items in my component stack.  
+
+This my current set-up (May 2022)  
 
 ## Server-side
 
-*   Drupal 9.3.12  
+*   __Drupal__ 9.3.12  
 
-*   Apache 2.4.41 running with PHP-fpm and APCu cacheing on Ubuntu 20.04 Linux. (In the past I haven't reliably been able to use Xdebug with Nginx and PHP-fpm)  
+*   __Apache__ 2.4.41 running with PHP-fpm and APCu cacheing on Ubuntu 20.04 Linux. (In the past I haven't reliably been able to use Xdebug with Nginx and PHP-fpm)  
 
-*   PHP 8.1 - (PHP 8.0 and later require Xdebug 3)  
+*   __PHP 8.1__ - (PHP 8.0 and later require Xdebug 3)  
 
-*   ___Xdebug 3___ which has different, simpler `php.ini` settings than previously _in Xdebug 2_
+*   __Xdebug 3__ which has different, simpler `php.ini` settings than previously was the case in _Xdebug 2_
 
 ## Client-side
 
-*   Ansible, Vagrant, and my fork of Jeff Geerling's Drupal-VM which I use to provision both the Live server and the virtual Dev machine.  
+*   __MacOS__ (Monterey 12) as the *host* machine in which Atom is the Xdebug client and PHP Xdebug running in the *guest* virtual dev machine
 
-*   MacOS (Monterey 12) as the *host* machine in which Atom is the Xdebug client and PHP Xdebug running in the *guest* virtual dev machine
+*   __Parallels__ Desktop providing the virtualisation for ...
 
-*   Parallels Desktop providing the virtualisation for the virtual Ubuntu Linux guest dev machine
+*   the virtual __Ubuntu__ Linux guest dev machine
 
 
 So we want to have:
@@ -53,9 +51,11 @@ So we want to have:
 
 1.  the Xdebug client running on our host machine as an Atom plugin.
 
-1.  We also want a browser set up with the ability to effectively switch Xdebug step tracing on and off for each http request it makes to the remote server.
+1.  We also want a browser set up with the ability to switch Xdebug step tracing on and off for each http request it makes to the remote server.
 
-# Atom setup.
+# Atom setup   
+
+Atom (developed by GitHub and contributors) is free of charge and a delight to use. It has (contributed) plugin packages that together can provide IDE-like functionality for many Drupal dev tasks.
 
 1.  I assume that you have the latest [Atom](https://atom.io) installed.
 
@@ -127,9 +127,7 @@ The Atom client's *PHP Console* panel indicates when the server is connected. Th
 
 # A note on PHPStorm  
 
-I no longer use PHPStorm. PHPStorm is very useful and as I have blogged previously, has been a reliable and fully-featured Xdebug client. 
+I have been a JetBrains subcriber but don't need PHPStorm at this time. PHPStorm is a superb product and very useful and, as I have blogged previously, is not only a useful Xdebug client, but a fully-fledged IDE with extensive and excellent help resources.  
 
-PHPStorm is a proprietary product which developers find invaluable and worth paying the annual subscription for, especially if they are contributing to Drupal on a daily or frequent schedule, but for the occasional Drupal Developer / DevOP who has to dip in on a less frequent basis, PHPStorm can be more than is needed and cost more than is warranted. It has every conceivable IDE bell and whistle out of the box plus extensive and excellent help resources.  
-
-But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve for a passable understanding of PHPStorm's execution model and its integrated value-added and layers and mighty IDE facilities is actually more demanding than that of setting up Xdebug from scratch. Unless, of course you can justify this investment in time and money in relation to the scale of the project in which you and your team are engaged.
+But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve is actually more demanding than that of setting up Xdebug from scratch. So,  you can justify your investment in time and money in relation to the scale of the project in which you and your team are engaged.
 
