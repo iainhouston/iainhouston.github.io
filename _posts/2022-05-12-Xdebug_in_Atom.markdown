@@ -20,9 +20,7 @@ We aim for *Low Code* site development, to do the minimum Drupal programming of 
 
 # Objectives
 
-Providing that Xdebug is set uo on the dev server  with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that I would record what is needed.  I have the following items in my component stack.  
-
-This my current set-up (May 2022)  
+Providing that Xdebug is set uo on the dev server  with the correct `php.ini` configuration, Atom can be set up as an Xdebug client really easily so I thought that I would record what is needed.  I have the following items in my component stack.
 
 ## Server-side
 
