@@ -16,9 +16,9 @@ This is  *opinionated* advice drawn from my experience with my simple use case. 
 
 # Motivation
 
-I aim to do the minimum Drupal programming of custom modules and themes that I can, but occasionally it is necessary to dust off the development tools and then try to remember what I was doing those months ago when I last had to.  
+We aim for *Low Code* site development, to do the minimum Drupal programming of custom modules and themes, but occasionally it is necessary for me to dust off the development tools and then try to remember what I was doing those months ago when I last had to.  
 
-So I need to get the tools I already have to do the "IDE" tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
+So I need to ready the development tools I already have to do the "IDE" tasks I need, chiefly editing and with some debugging and inspection using Atom as an Xdebug client.
 
 # Objectives
 
