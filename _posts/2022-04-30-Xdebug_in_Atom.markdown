@@ -5,6 +5,8 @@ permalink: /atom_xdebug_client/
 categories: ['DevOps', 'Drupal']
 ---  
 
+*[Last edited {{ site.time | date: '%B %d, %Y' }}]*
+
 # Summary
  
 Atom's docs and most web articles  still refer  to  __Xdebug 2__ configuration and older versions of PHP rather than the current versions of both.
@@ -120,14 +122,14 @@ If you mainly want to set breakpoints and inspect variables then I think the con
 
 # Set up breakpoints  
 
-*"Move the cursor to a line you want to break on and set a breakpoint by pressing `Alt+F9`.
+In Atom *"Move the cursor to a line you want to break on and set a breakpoint by pressing `Alt+F9`.
 If everything worked correctly, you can now use the various buttons/commands to step through the script."*
 
 The Atom client's *PHP Console* panel indicates when the server is connected. The *PHP Debug* panel lists the breakpoints you have set and allows you to inspect the values of variables at such breakpoints.
 
 # A note on PHPStorm  
 
-I have been a JetBrains subcriber but don't need PHPStorm at this time. PHPStorm is a superb product and very useful and, as I have blogged previously, is not only a useful Xdebug client, but a fully-fledged IDE with extensive and excellent help resources.  
+I have been a JetBrains subcriber for many years but don't need PHPStorm at this time. PHPStorm is a superb product and very useful and, as I have blogged previously, is not only a useful Xdebug client, but a fully-fledged IDE with extensive and excellent help resources.  
 
-But PHPStorm is not easy to set up for Xdebug. There are many PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve is actually more demanding than that of setting up Xdebug from scratch. So,  you can justify your investment in time and money in relation to the scale of the project in which you and your team are engaged.
+But PHPStorm is not easy to set up for Xdebug. There are several PHPStorm-specific concepts to grasp when configuring it and so, having done this several times over the last decade, I am of the opinion that the learning curve is actually more demanding than that of setting up Xdebug from scratch. So,  you can justify your investment in time and money in relation to the scale of the project in which you and your team are engaged.
 
