@@ -14,12 +14,14 @@ To preserve the iPad's real estate, I leave the Designer tools and Studios etc o
 
 ## Separate Designer's drawing canvas from studio controls etc.
 
-1.  In Designer, click on `Window >> Float View to Window`
+1.  Open Designer 2 on the Mac
+
+1.  Click on `Window >> Float View to Window`
 
 1.  In the MacOS menu bar click on the Displays icon and then click `Mirror or Extend to >> Iain's iPad`
 
 1.  Then choose `Use as sparate display`
 
-1.  Now slide Designer's separate drawing window over right out of the Mac display and thus onto the iPad
+1.  Now slide Designer's separated drawing window right out of the Mac display and thus onto the iPad's display
 
-Now I can select brushes and colours etc on the Mac and zoom and draw with the Apple Pencil on the iPad
+Now I can select brushes and colours etc. on the Mac and zoom and draw with the Apple Pencil on the iPad
