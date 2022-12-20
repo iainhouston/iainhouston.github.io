@@ -1,3 +1,4 @@
+---
 title: Is Imperialism the only way?
 layout: post
 permalink: /only_imperialism/
