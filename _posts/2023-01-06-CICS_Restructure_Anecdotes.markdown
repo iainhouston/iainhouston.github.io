@@ -2,7 +2,7 @@
 title: Anecdotes of CICS Development
 layout: post
 permalink: /restructure_anecdotes/
-categories: ['CICS', 'Software Development', 'Programming']
+categories: ['CICS', 'Software Development', 'Programming', 'Formal Specifications']
 ---
 
 This article was made in response for a "call for history" in 2019 in anticipation of the 50th anniverary of IBM's program product CICS. The call asked particularly for memories of the CICS Restructure project. 
@@ -31,3 +31,12 @@ Both CICS/ESA Restructure and CICS/VS required a Storage Control Program (DFHSCP
 The previous example brings out a significant point for those interested in the software development process we were deploying at that time. For CICS Restructure, the “waterfall” from the formal, mathematical, Z specification to code - “waterfall” being the most appropriate process here - was essentially an informal step. Peter Lupton worked with Carroll Morgan of the Programming Research Group on program verification methods; in the event the Restructure team employed  one or more levels of specification-to-design “refinement” in Dijkstra’s language of guarded commands, but in most cases there was no formal relationship between the documents produced at different levels of abstraction, and so very little proof work was done to establish that the code was a correct implementation of the Z specification, although the preconditions of operations were recorded. Nevertheless, even though an ideal formal  program refinement process was not possible, the benefits of being “as formal as practically possible” resulted in tremendous savings in testing costs and maintenance costs once the product had become available to customers at  the end of June 1990. This was due to everybody involved knowing precisely and unambiguously how each restructured module was supposed to behave.
 
 In collaboration with the Oxford University Computing Laboratory, under the leadership of Tony Hoare, this work with Z won, jointly, the Queen's Award for Technological Achievement.
+
+## Queens Award Commemoration Events
+
+### Queens Award (IBM)
+
+![Queens Award (IBM) (#1)](/assets/images/Queens_Award_Phyllis_Byrne.jpg)
+
+### Queens Award (Oxford University Computing Lab)
+![Queens Award (Computing Lab) (#2)](/assets/images/Queens_Award_Computing_Lab.jpg)
