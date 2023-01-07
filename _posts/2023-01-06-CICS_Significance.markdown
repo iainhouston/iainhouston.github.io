@@ -5,13 +5,18 @@ permalink: /CICS_Significance/
 categories: ['CICS', 'Software Development']
 ---
 
+
+I hope IBM will forgive me for reproducing the *CICS: Securing Online Transactions* article below which they published in 2009 and which is as true now, I expect, as it was then. I was motivated to post this after having met up with my newly rediscovered good friend and first line manager of the RDO project in CICS 1.7, Chris Nix.
+
+So this post is partly "the significance of CICS to me" and partly  "the significance of CICS to the world"  and partly  "the significance of CICS to IBM"
+
 # CICS 1.7 (RDO)
 
-I hope IBM will forgive me for reproducing the article below which they published in 2009 and which is as true now, I expect, as it was then. I was motivated to post this after having met up with my newly rediscovered good friend and first line manager of the RDO project in CICS 1.7, Chris Nix. 
+I worked on CICS from 1976 for several years. At some time in 1980? I proposed an addition to the system that allowed users to add, remove, update and delete "resources" such as files, application programs, queues etc. *dynamically*, in other words without having to re-assemble definition tables and recycle the system which was the norm for systems like CICS and IMS at that time. So we developed a CICS *transaction program* we named CEDA for *Dynamic Allocation of resoures* which you might just make out in the screenshot below. We called the project RDO for *Resource Definition Online*.
 
-I worked on CICS from 1976 for several years. At some time in 1980? I proposed an addition to the system that allowed users to add, remove, update and delete "resources" such as files, application programs, queues etc. *dynamically*, in other words without having to re-assemble definition tables and recycle the system which was the norm for systems like CICS and IMS at that time. So we developed a CICS *transaction program* we named CEDA for *Dynamic Allocation of resoures* which you might just make out in the screenshot below. We called the projects RDO for *Resource Definition Online* I wrote several thousand lines of PL/S to implement the CEDA transaction. This was the first bit of CICS to be released (in CICS 1.7) that was written in a high level language. Previously all the CICS programs were written in (the wonderful, and anything but Basic) IBM /370 Basic Assembler Language. Later releases contained *CICS Restructure* code in PL/S.
+I wrote several thousand lines of PL/S to implement the CEDA transaction. The specification and design was written using an IBM-proprietary set-theoretic specification notation (less formal than Z or VDM) and the design implemented the basic set-theoretic "classes" of the specification, and as there were no PL/S libraries avilable for this kind of thing we borrowed from the published  Modula-2 Library to which I had contributed. CICS 1.7 was the first bit of CICS to be released that was written mostly in a high level language. Previously all the CICS programs were written in (the wonderful, and anything but Basic) IBM /370 Basic Assembler Language. Later releases contained *CICS Restructure* code in PL/S.
 
-I was part of Chris Nix's *Systems* Development team whose members included:
+CICS RDO was developed by Chris Nix's *Systems* Development team whose members also included:
 
 -  Ken Davies (who did the difficult bits of RDO's interprocess syncronisation if I recall)
 -  Brian Harder
