@@ -12,7 +12,7 @@ Firstly, *Miles Mode* has a very arresting 8 bar motif. That's what I'm focusing
 
 It is a simple short tune written by John Coltrane and performed by him and the great quartet of 1962 consisting of  
   
--  John Coltrane – saxophone  
+-  John Coltrane – tenor saxophone  
 
 -  Jimmy Garrison – double bass  
 
