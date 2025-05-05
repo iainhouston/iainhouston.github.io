@@ -8,7 +8,7 @@ categories: ['Scripting']
 
 Well, this has been a fascinating project: I was looking back at my AppleScript Jekyll Assistant and thinking that "this is so much more complicated than it neeeds to be". 
 
-I had used the Swift Argument Parser before and had toyed with writing command line scripts in Swift but was a bit daunted. By the documentation. So ChatGPT came to the rescue and helped me write the following. So AI has definitely been a “productivity enhancer” in this case. I know my way around but am not an expert in the APIs that I rarely use. ChatGPT helped me with the important and unfamiliar detail and I think you’ll agree we came up with a pretty elegant solution.
+I had used the Swift Argument Parser before and had toyed with writing command line scripts in Swift but was a bit daunted. By the documentation. So ChatGPT came to the rescue and helped me write the following. So AI has definitely been a “productivity enhancer” in this case. I know my way around but am not an expert in the APIs that I rarely use. And getting the regular expressions just right is something that usually would have taken me a lot of time. So ChatGPT helped me with the important and unfamiliar detail and I think you’ll agree we came up with a pretty elegant solution.
 
 ```swift
 #!/usr/bin/env swift
