@@ -6,7 +6,9 @@ comments: true
 categories: ['Scripting']
 ---
 
-Well, this has been a fascinating project: I was looking back at my AppleScript Jekyll Assistant and thinking that "this is so much more complicated than it neeeds to be". 
+Well, this has been a fascinating project: I was looking back at my [AppleScript Jekyll Assistant]({% post_url 2020-02-03-Applescript_Jekyll_assistant_pt_5 %}) and thinking that "this is so much more complicated than it neeeds to be". So I rewrote it in Swift using the [Swift Argument Parser](https://github.com/apple/swift-argument-parser).  
+
+Quite apart from anything else, I really love the conditional `let` (`if let`): allows for a really quite elegant, readable solution.
 
 I had used the Swift Argument Parser before and had toyed with writing command line scripts in Swift but was a bit daunted. By the documentation. So ChatGPT came to the rescue and helped me write the following. So AI has definitely been a “productivity enhancer” in this case. I know my way around but am not an expert in the APIs that I rarely use. And getting the regular expressions just right is something that usually would have taken me a lot of time. So ChatGPT helped me with the important and unfamiliar detail and I think you’ll agree we came up with a pretty elegant solution.
 
