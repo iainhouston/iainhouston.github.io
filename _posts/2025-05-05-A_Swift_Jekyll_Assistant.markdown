@@ -3,12 +3,12 @@ title: A Swift Jekyll Assistant
 date:  2025-05-05 07-02-52
 layout: post
 comments: true
-categories: ['Scripting']
+categories: ['Scripting','AI']
 ---
 
-Well, this has been a fascinating project: I was looking back at my [AppleScript Jekyll Assistant]({% post_url 2020-02-03-Applescript_Jekyll_assistant_pt_5 %}) and thinking that "this is so much more complicated than it neeeds to be". So I rewrote it in Swift using the [Swift Argument Parser](https://github.com/apple/swift-argument-parser).  
+Well, this has been a fascinating project: I was looking back at my [AppleScript Jekyll Assistant]({% post_url 2020-02-03-Applescript_Jekyll_assistant_pt_5 %}) and thinking that "this is so much more complicated than it neeeds to be". So I rewrote it in Swift using the [Swift Argument Parser](https://github.com/apple/swift-argument-parser) with a little help from ChatGPT.  
 
-Quite apart from anything else, I really love the conditional `let` (`if let`): allows for a really quite elegant, readable solution.
+Quite apart from anything else, I really love Swift's conditional `let` (`if let`): it allows for a really quite elegant, readable solution to safely unwrapping optional values.
 
 I had written command line scripts in Swiftusing the Swift Argument Parser but was a bit short of time to study the documentation again and to remember the Swift development ecosystem. So ChatGPT came to the rescue and helped me write the following.   
 
