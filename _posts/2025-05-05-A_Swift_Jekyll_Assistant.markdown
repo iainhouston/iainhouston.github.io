@@ -10,9 +10,9 @@ Well, this has been a fascinating project: I was looking back at my [AppleScript
 
 Quite apart from anything else, I really love Swift's conditional `let` (`if let`): it allows for a really quite elegant, readable solution to safely unwrapping optional values.
 
-I had written command line scripts in Swiftusing the Swift Argument Parser but was a bit short of time to study the documentation again and to remember the Swift development ecosystem. So ChatGPT came to the rescue and helped me write the following.   
+I had written command line scripts in Swift using the Swift Argument Parser but was a bit short of time to study the documentation again and to remember the Swift development ecosystem. So ChatGPT came to the rescue and helped me write the following.   
 
-So my conclusion from this experience is that AI has definitely been a “productivity enhancer” here. I know my way around many different programming languages but obviously am not an expert in those APIs that I rarely use: take the `expandingTildeInPath` property getter in the Foundation APIs for example. And getting the regular expressions just right is something that usually would have taken me a lot of time. So ChatGPT helped me with the important and unfamiliar detail and I think you’ll agree we came up with a pretty elegant solution.
+So my conclusion from this experience is that AI has definitely been a “productivity enhancer” here. I know my way around many different programming languages but obviously am not an expert in those APIs that I rarely use: take the `expandingTildeInPath` property getter in the Foundation APIs for example. And getting the regular expressions just right (when sanitizing the description string) is something that usually would have taken me several attempts. So ChatGPT helped me with the important and unfamiliar detail and I think you’ll agree we came up with a pretty elegant solution.
 
 ```swift
 #!/usr/bin/env swift
