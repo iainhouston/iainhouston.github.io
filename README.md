@@ -5,5 +5,7 @@ Accessible at https://iainhouston.com
 
 ## Run
 
-`bundle update`
-`bundle exec jekyll serve`
+```
+bundle update
+bundle exec jekyll serve
+```
