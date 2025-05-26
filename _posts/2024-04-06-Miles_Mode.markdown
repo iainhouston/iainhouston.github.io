@@ -27,7 +27,7 @@ It is a simple short tune written by John Coltrane and performed by him and the 
 
 The 32 bar head is:
 
-.  8 bar motif ("A" see below)  
+.  8 bar motif (Rehearsal Mark "A" see below)  
 .  16 bars improvised on B minor ("B")  
 .  repeat "A"  
 
